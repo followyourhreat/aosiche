@@ -1,0 +1,819 @@
+/*所有项目都会用不到的公共样式 start*/
+
+@import '../scss/constant.style.scss';
+@import '../scss/mixin.scss';
+textarea.dt-textarea:focus,
+input.dt-input[type='text']:focus,
+input.dt-input[type='password']:focus {
+    border-color: #409EFF;
+}
+
+input.dt-input[type='text']:disabled {
+    //background: red;
+    background: #FBFCFF;
+    border: 0;
+    color: #444;
+}
+
+textarea.dt-textarea {
+    padding: 10px 10px 10px 14px;
+    color: $scolor-form-color;
+    resize: none;
+    border: 1px solid $color-form-border;
+    border-radius: 4px;
+    // background: #F9FBFF;
+    -webkit-appearance: none;
+    outline: none;
+    font-size: $size-one;
+}
+
+textarea.dt-textarea::-webkit-input-placeholder {
+    color: $color-form-placeholder;
+    font-size: $size-one;
+}
+
+textarea.dt-textarea::-moz-placeholder {
+    color: $color-form-placeholder;
+    font-size: $size-one;
+}
+
+textarea.dt-textarea::-ms-input-placeholder {
+    color: $color-form-placeholder;
+    font-size: $size-one;
+}
+
+input.dt-input[type='text'],
+input.dt-input[type='password'] {
+    padding: 0 10px;
+    min-width: 90px;
+    width: 100%;
+    min-height: 30px;
+    height: 100%;
+    border-radius: 4px;
+    // background: #F9FBFF;
+    border: 1px solid $color-form-border;
+    font-size: $size-one;
+    outline: none;
+    color: $scolor-form-color;
+    -webkit-appearance: none;
+    outline: none;
+}
+
+input.dt-input[type='text']::-webkit-input-placeholder,
+input.dt-input[type='password']::-webkit-input-placeholder {
+    font-size: $size-one;
+    color: $color-form-placeholder;
+}
+
+
+/*placeholder字体颜色*/
+
+input.dt-input[type='text']::-moz-placeholder,
+input.dt-input[type='password']::-moz-placeholder {
+    font-size: $size-one;
+    color: $color-form-placeholder;
+}
+
+input.dt-input[type='text']::-ms-input-placeholder,
+input.dt-input[type='password']::-ms-input-placeholder {
+    font-size: $size-one;
+    color: $color-form-placeholder;
+}
+
+
+/*所有项目都会用不到的公共样式 end*/
+
+
+/* ===================公共按钮的样式 start=================*/
+
+@mixin btn-padding-same {
+    padding: 0 30px 0 52px;
+}
+
+.dt-btn:hover,
+.dt-btn-cancel:hover {
+    opacity: 0.8;
+}
+
+.dt-btn {
+    background: $color-btn-bg;
+    border-radius: 8px;
+    border: 0;
+    height: 36px;
+    line-height: 36px;
+    box-sizing: border-box;
+    font-size: $size-three;
+    color: $color-btn;
+    border: none;
+    outline: none;
+    // min-width: 80px;
+    padding: 0 20px;
+    cursor: pointer;
+}
+
+// 查询按钮取消
+.dt-btn-cancel {
+    border: 1px solid $color-btn-bg;
+    background: #FFF;
+    color: $color-btn-bg;
+    line-height: 34px;
+}
+
+// 警告按钮
+.dt-btn.dt-btn-danger {
+    background: $color-btn-danger-bg;
+}
+
+// 查询按钮
+.dt-btn.dt-btn-search {
+    @include btn-padding-same;
+    background: $color-btn-bg
+}
+
+// 新增按钮
+.dt-btn.dt-btn-add {
+    @include btn-padding-same;
+    background: $color-none-active
+}
+
+// 修改按钮
+.dt-btn.dt-btn-modify {
+    @include btn-padding-same;
+    background: $color-none-active
+}
+
+// 修改导出
+.dt-btn.dt-btn-export {
+    @include btn-padding-same;
+    background: $color-none-active
+}
+
+// 上传按钮
+.dt-btn.dt-btn-upload {
+    @include btn-padding-same;
+}
+
+// 删除按钮
+.dt-btn.dt-btn-delete {
+    @include btn-padding-same;
+    border: 1px solid $color-none-active;
+    color: #fff;
+    background: $color-none-active;
+    line-height: 34px;
+    text-align: center;
+}
+
+
+/* ===================公共按钮的样式 end=================*/
+
+
+/* 表格样式  start */
+
+// 以manage.vue 为标准参考
+.dt-table-outer {
+    width: 100%;
+    background: #FFF;
+    @include shadow;
+    // box-shadow: 0 0px 3px 1px rgba(197, 197, 197, 0.50);
+    border-radius: 4px;
+    // border: 1px solid rgba(229, 234, 243, 0.8);
+    border-radius: 2px;
+    padding-bottom: 20px;
+    /*min-width: 900px;*/
+    min-height: 400px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.dt-table-true-wrap {
+    width: 100%;
+    min-height: 542px;
+    overflow-y: auto;
+    background: #FFF;
+    &::-webkit-scrollbar {
+        height: 16px;
+    }
+}
+
+.dt-table-same {
+    width: 100.05%;
+    // table-layout: fixed;
+    border: 0;
+    // cellspacing: 0;
+    // cellpadding: 0;
+}
+
+.dt-table-same thead tr {
+    background: $color-thead-tr-bg;
+}
+
+.dt-table-same thead th {
+    height: 40px;
+    font-size: $size-three;
+    color: $color-table-th-word;
+    border-bottom: 1px solid #E5E5E5;
+    font-weight: 500;
+}
+
+.dt-table-same thead th:last-of-type {
+    border-right: 0;
+}
+
+.dt-table-same tbody td {
+    height: 50px;
+    font-size: $size-two;
+    color: $color-table-td-word;
+    border: none;
+    /*border-right: 1px solid #D7E2F5;*/
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.dt-table-same tbody tr:nth-child(even) {
+    background: $color-tbody-tr-even-bg;
+}
+
+.dt-table-same tbody tr:nth-child(odd) {
+    background: $color-tbody-tr-odd-bg;
+}
+
+.dt-table-same tbody tr:last-child {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+// 表格选中的样式
+.dt-table-same thead th.dt-table-check,
+.dt-table-same tbody td.dt-table-check {
+    min-width: 50px;
+    max-width: 80px;
+    width: 80px;
+}
+
+.dt-table-same thead th.dt-table-check.dt-table-checked,
+.dt-table-same tbody td.dt-table-check.dt-table-checked {
+    min-width: 50px;
+    max-width: 50px;
+    width: 50px;
+}
+
+// 表格操作中的样式
+.dt-table-edit>b {
+    display: inline-block;
+    color: $color-active;
+    padding: 4px 14px;
+    cursor: pointer;
+    // border: 1px solid #C4E7FF;
+    border: 1px solid $color-active;
+    border-radius: 100px;
+    margin: 0 10px;
+    &.dt-table-detele {
+        border-color: #FFCFE0;
+        color: #FE2E76;
+        // border: 1px solid #FFCFE0;
+        // border-radius: 100px;
+    }
+    &.dt-table-edit-no-click {
+        cursor: inherit;
+        color: #B3B3B3;
+        // border: 0;
+        border-color: #dcdee2;
+    }
+}
+
+// 分页插件
+.dt-page-wrap {
+    height: 60px;
+    overflow: hidden;
+    padding: 14px 40px 0 40px;
+}
+
+// .dt-page-wrap .el-pagination {
+//     text-align: right;
+//     margin-right: 40px;
+//     margin-top: 14px;
+// }
+.dt-page-wrap .dt-pagition {
+    margin-top: 14px;
+}
+
+// td 宽度公共样式
+
+/**
+  已经配置的选项：
+  1 "设备ID":"tw-device-id"
+  2 "设备名称":"tw-device-name"
+  3 "通讯方式":"tw-communicate-type"
+  4 "设备类型":"tw-device-type"
+  5 "设备品牌":"tw-device-brand"
+  6 "设备状态":"tw-device-status"
+  7 "网络状态":"tw-network-status"
+  8 "设备型号":"tw-device-model"
+  9 "设备系列":"tw-device-series"
+  10 "省":"tw-province"
+  11 "市":"tw-city"
+  12 "区":"tw-district"
+  13 "服务区域(包含省市区)":"tw-area"
+  14 "通讯地址 || 详细地址":"tw-address"
+  16 "用户姓名 || 操作人 || 客户名称":"tw-user-name"
+  17 "手机号码 || 联系电话":"tw-telephone"
+  20 "设备终端"："tw-device-terminal"
+  21 "设备MAC"："tw-device-mac"
+  22 "滤芯ID": "tw-filter-id"
+  24 "使用状态": "tw-use-status"
+  26 "滤芯状态": "tw-filter-status"
+  27 "通知状态|升级状态": "tw-inform-status"
+  28 "通知类型": "tw-inform-type"
+  30 "操作账号|账号": "tw-handle-account"
+  31 "时间 yyyy-MM-dd hh:mm:ss": "tw-time-ss"  // 时间带年-月-日 时：分：秒的
+  32 "时间 yyyy-MM-dd": "tw-time-date"  // 时间带年-月-日
+  33 "操作 | 编辑": "tw-handle-edit"
+  34 "操作 | 编辑 & 删除": "tw-handle-edit2"
+  35 "模板类型": "tw-template-type"
+  36 "推送渠道": "tw-push-channel"
+  37 "是否紧急": "tw-whether-urgent"
+  38 "信息类型": "tw-info-type"
+  39 "模板||模板名称": "tw-template-name"
+  40 "信息标题": "tw-info-title"
+  41 "反馈类型": "tw-feedback-type" // 【用户反馈管理页面 || 】
+  42 "处理状态": "tw-feedback-handle-status" // 【用户反馈管理页面 || 】
+  43 "反馈标题": "tw-feedback-title" // 【用户反馈管理页面 || 】
+  44 "反馈内容": "tw-feedback-con"  // 【用户反馈管理页面 || 】
+  45 "服务单号": "tw-service-number" // 【待处理订单页面 || 】
+  46 "服务类型": "tw-service-type" // 【待处理订单页面 || 】
+  47 "问题分类": "tw-question-category"  // 【待处理订单页面 || 】
+  48 "角色类型"："tw-role-type" // 【服务人员审核页面 || 】
+  49 "公司|公司名称"："tw-company-name" // 【服务人员审核页面 || 】
+  50 "所属代理商"："tw-belong-agent" // 【前端账号管理 || 】
+  51 "代理商级别"："tw-agent-grade" // 【前端账号管理 || 】
+  52 "员工编号"："tw-staff-no" // 【前端账号管理 || 】
+  53 "员工职务"："tw-staff-position" // 【前端账号管理 || 】
+  54 "综合评分"："tw-composite-score" // 【前端账号管理 || 】
+  55 "省 + 市 + 区 + 街道"：'tw-whole-address'
+  56 "固件版本名称"：'tw-version-name' // 【升级管理 || 】
+  57 "固件版本类型"：'tw-version-type' // 【升级管理 || 】
+  58 "上传版本号"：'tw-version-no' // 【升级管理 || 】
+  59 "版本升级说明"：'tw-upgrade-description' // 【升级管理 || 】
+
+*/
+
+.dt-table-same thead th {
+    min-width: 100px;
+}
+
+.dt-table-same thead .tw-120 {
+    min-width: 120px;
+}
+
+.dt-table-same thead .tw-140 {
+    min-width: 140px;
+}
+
+.dt-table-same thead .tw-160 {
+    min-width: 160px;
+}
+
+.dt-table-same thead .tw-180 {
+    min-width: 180px;
+}
+
+.dt-table-same thead .tw-200 {
+    min-width: 200px;
+}
+
+//1 table th "序号"长度
+.dt-table-same thead .tw-xuhao-id {
+    min-width: $length-table-xuhao-id;
+}
+
+//1 table th "设备ID"长度
+.dt-table-same thead .tw-device-id {
+    min-width: $length-table-device-id;
+    text-align: left;
+}
+
+.dt-table-same thead .tw-devices-id {
+    min-width: $length-table-devices-id;
+}
+
+//2 table th "设备名称"长度
+.dt-table-same thead .tw-device-name {
+    min-width: $length-table-device-name
+}
+
+//3 table th "通讯方式"长度
+.dt-table-same thead .tw-communicate-type {
+    min-width: $length-table-communicate-type
+}
+
+//4 table th "设备类型"长度
+.dt-table-same thead .tw-device-type {
+    min-width: $length-table-device-type
+}
+
+//5 table th "设备品牌"长度
+.dt-table-same thead .tw-device-brand {
+    min-width: $length-table-device-brand
+}
+
+//6 table th "设备状态"长度
+.dt-table-same thead .tw-device-status {
+    min-width: $length-table-device-status
+}
+
+//7 table th "网络状态"长度
+.dt-table-same thead .tw-network-status {
+    min-width: $length-table-network-status
+}
+
+//8 table th "设备型号"长度
+.dt-table-same thead .tw-device-model {
+    min-width: $length-table-device-model
+}
+
+//9 table th "设备系列"长度
+.dt-table-same thead .tw-device-series {
+    min-width: $length-table-device-series
+}
+
+//10 table th "省"长度
+.dt-table-same thead .tw-province {
+    min-width: $length-table-province
+}
+
+//11 table th "市"长度
+.dt-table-same thead .tw-city {
+    min-width: $length-table-city
+}
+
+//12 table th "区"长度
+.dt-table-same thead .tw-district {
+    min-width: $length-table-district
+}
+
+//13 table th "服务区域(包含省市区)"长度
+.dt-table-same thead .tw-area {
+    min-width: $length-table-area
+}
+
+//14 table th "通讯地址 || 详细地址"长度
+.dt-table-same thead .tw-address {
+    min-width: $length-table-address
+}
+
+//16 table th "用户姓名"长度
+.dt-table-same thead .tw-user-name {
+    min-width: $length-table-user-name
+}
+
+//17 table th "手机号码"长度
+.dt-table-same thead .tw-telephone {
+    min-width: $length-table-telephone
+}
+
+//20 table th "设备终端"长度
+.dt-table-same thead .tw-device-terminal {
+    min-width: $length-table-device-terminal
+}
+
+//21 table th "设备MAC"长度
+.dt-table-same thead .tw-device-mac {
+    min-width: $length-table-device-mac
+}
+
+//22 table th "滤芯ID"长度
+.dt-table-same thead .tw-filter-id {
+    min-width: $length-table-filter-id
+}
+
+//24 table th "使用状态"长度
+.dt-table-same thead .tw-use-status {
+    min-width: $length-table-use-status
+}
+
+//26 table th "滤芯状态"长度
+.dt-table-same thead .tw-filter-status {
+    min-width: $length-table-filter-status
+}
+
+//27 table th "通知状态"长度
+.dt-table-same thead .tw-inform-status {
+    min-width: $length-table-inform-status
+}
+
+//28 table th "通知类型"长度
+.dt-table-same thead .tw-inform-type {
+    min-width: $length-table-inform-type
+}
+
+//30 table th "操作账号"长度
+.dt-table-same thead .tw-handle-account {
+    min-width: $length-table-handle-account
+}
+
+//31 table th "时间 yyyy-MM-dd hh:mm:ss "长度
+.dt-table-same thead .tw-time-ss {
+    min-width: $length-table-time-ss
+}
+
+//32 table th "时间 yyyy-MM-dd"长度
+.dt-table-same thead .tw-time-date {
+    min-width: $length-table-time-date
+}
+
+//33 table th "操作 | 编辑"长度
+.dt-table-same thead .tw-handle-edit {
+    min-width: $length-table-handle-edit
+}
+
+//34 table th "操作 | 编辑 & 删除"长度
+.dt-table-same thead .tw-handle-edit2 {
+    min-width: $length-table-handle-edit2
+}
+
+//35 table th "模板类型"长度
+.dt-table-same thead .tw-template-type {
+    min-width: $length-table-template-type
+}
+
+//36 table th "推送渠道"长度
+.dt-table-same thead .tw-push-channel {
+    min-width: $length-table-push-channel
+}
+
+//37 table th "是否紧急"长度
+.dt-table-same thead .tw-whether-urgent {
+    min-width: $length-table-whether-urgent
+}
+
+//38 table th "信息类型"长度
+.dt-table-same thead .tw-info-type {
+    min-width: $length-table-info-type
+}
+
+//39 table th "模板||模板名称"长度
+.dt-table-same thead .tw-template-name {
+    min-width: $length-table-template-name
+}
+
+//40 table th "信息标题"长度
+.dt-table-same thead .tw-info-title {
+    min-width: $length-table-info-title
+}
+
+//41 table th "反馈类型【用户反馈管理页面 | 】"长度
+.dt-table-same thead .tw-feedback-type {
+    min-width: $length-table-feedback-type
+}
+
+//42 table th "处理状态【用户反馈管理页面 | 】"长度
+.dt-table-same thead .tw-feedback-handle-status {
+    min-width: $length-table-feedback-handle-status
+}
+
+//43 table th "反馈标题【用户反馈管理页面 | 】"长度
+.dt-table-same thead .tw-feedback-title {
+    min-width: $length-table-feedback-title
+}
+
+//44 table th "反馈内容【用户反馈管理页面 | 】"长度
+.dt-table-same thead .tw-feedback-con {
+    min-width: $length-table-feedback-con
+}
+
+//45 table th "服务单号【待处理订单页面 | 】"长度
+.dt-table-same thead .tw-service-number {
+    min-width: $length-table-service-number
+}
+
+//46 table th "服务类型【待处理订单页面 | 】"长度
+.dt-table-same thead .tw-service-type {
+    min-width: $length-table-service-type
+}
+
+//47 table th "问题分类【待处理订单页面 | 】"长度
+.dt-table-same thead .tw-question-category {
+    min-width: $length-table-question-category
+}
+
+//48 table th "角色类型【服务人员审核页面 || 】"长度
+.dt-table-same thead .tw-role-type {
+    min-width: $length-table-role-type
+}
+
+//49 table th "公司|公司名称【服务人员审核页面 | 】"长度
+.dt-table-same thead .tw-company-name {
+    min-width: $length-table-company-name
+}
+
+//50 table th "所属代理商【前端账号管理 | 】"长度
+.dt-table-same thead .tw-belong-agent {
+    min-width: $length-table-belong-agent
+}
+
+//51 table th "代理商级别【服务人员审核页面 | 】"长度
+.dt-table-same thead .tw-agent-grade {
+    min-width: $length-table-agent-grade
+}
+
+//52 table th "员工编号【服务人员审核页面 | 】"长度
+.dt-table-same thead .tw-staff-no {
+    min-width: $length-table-staff-no
+}
+
+//53 table th "员工职务【服务人员审核页面 | 】"长度
+.dt-table-same thead .tw-staff-position {
+    min-width: $length-table-staff-position
+}
+
+//54 table th "综合评分【服务人员审核页面 | 】"长度
+.dt-table-same thead .tw-composite-score {
+    min-width: $length-table-composite-score
+}
+
+// 55 "省 + 市 + 区 + 街道"：$length-table-whole-address
+.dt-table-same thead .tw-whole-address {
+    min-width: $length-table-whole-address
+}
+
+// 56 "固件版本名称"：$length-table-version-name
+.dt-table-same thead .tw-version-name {
+    min-width: $length-table-version-name
+}
+
+// 57 "固件版本类型"：$length-table-version-type
+.dt-table-same thead .tw-version-type {
+    min-width: $length-table-version-type
+}
+
+// 58 "上传版本号"：$length-table-version-no
+.dt-table-same thead .tw-version-no {
+    min-width: $length-table-version-no
+}
+
+// 59 "升级说明"：$length-table-upgrade-description
+.dt-table-same thead .tw-upgrade-description {
+    min-width: $length-table-upgrade-description
+}
+
+
+/* =============== 表格样式  end ================*/
+
+// 选择文件上传样式 start
+.dt-upload-file {
+    position: relative;
+    display: inline-block;
+    background-color: #FFF;
+    border: 1px solid #dee9f4;
+    border-radius: 2px;
+    height: 30px;
+    line-height: 30px;
+    color: #c5cad5;
+    text-decoration: none;
+    text-indent: 0;
+    width: 300px;
+}
+
+.dt-upload-file>input[type='file'] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.dt-upload-file>i {
+    // display: inline-block;
+    width: 220px;
+    float: left;
+    height: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-left: 12px;
+}
+
+.dt-upload-file>span {
+    // display: inline-block;
+    float: right;
+    width: 60px;
+    height: 100%;
+    text-align: center;
+    border-left: 1px solid #dee9f4;
+    background-color: $color-active;
+    color: #FFF;
+}
+
+.dt-upload-file:hover {
+    opacity: 0.9;
+}
+
+.dt-download-file {
+    display: inline-block;
+    /*background: #3F74F9;*/
+    border: 1px solid $color-active;
+    padding: 0 12px;
+    height: 30px;
+    font-weight: 100;
+    line-height: 30px;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    font-size: 14px;
+    color: $color-active;
+    text-align: center;
+    cursor: pointer;
+    /*border: 0 none;*/
+}
+
+// 选择文件上传样式 start
+// 地图样式 start
+.map-content-outer {
+    border: 1px solid #8e8e8e;
+    width: auto;
+    height: 22px;
+    border-radius: 5px 5px 5px 0;
+    left: 0;
+    top: 0;
+    color: #555;
+    background-color: #fffeef;
+    font-size: 12px;
+    white-space: nowrap;
+    position: absolute;
+    // overflow: hidden;
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 0;
+        height: 0;
+        border: solid rgba(0, 0, 0, 0);
+        border-width: 6px;
+        left: 13px;
+        bottom: -13px;
+        // border-top-color: #8e8e8e;
+        border-top-color: #313030;
+    }
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 0;
+        height: 0;
+        border: solid rgba(0, 0, 0, 0);
+        border-width: 6px;
+        left: 13px;
+        bottom: -12px;
+        border-top-color: #fffeef;
+    }
+    i {
+        vertical-align: middle;
+        padding: 2px 5px;
+        display: inline-block;
+        height: 20px;
+        font-size: 12px;
+        line-height: 16px
+    }
+    .map-name {
+        border-radius: 5px 0 0 0;
+    }
+    .map-total {
+        background-color: #dc3912;
+        color: #fff;
+        border-radius: 0 5px 5px 0;
+    }
+}
+
+// 去掉高德地图logo
+.amap-logo,
+.amap-copyright {
+    display: none!important;
+}
+
+// 地图样式开始 end
+// border: 1px solid #8e8e8e;
+// width: auto;
+// height: 22px;
+// border-radius: 5px 5px 5px 0;
+// left: 0;
+// top: 0;
+
+/* =============== 登录页  start ================*/
+
+.sign {
+    background: $login-bg-background;
+}
+
+.ivu-form-item-content .dt-input .ivu-input-icon-validate {
+    display: inline-block;
+    width: 64px;
+    // background: url("../assets/img/icon_user.png") no-repeat center center / auto;
+}
+
+
+/* =============== 登陆页  end ================*/

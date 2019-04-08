@@ -1,0 +1,117 @@
+/*! minireset.css v0.0.3 | MIT License | github.com/jgthms/minireset.css */
+
+html,
+body,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe,
+hr,
+i,
+b,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+em,
+i,
+b {
+    font-style: normal;
+    font-weight: 400;
+}
+
+ul,
+ol,
+li,
+dl,
+dt,
+dd {
+    list-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+    margin: 0;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+img,
+embed,
+iframe,
+object,
+audio,
+video {
+    height: auto;
+    max-width: 100%;
+}
+
+iframe {
+    border: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+td,
+th {
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/*清除ie10+文本框的叉叉和密码输入框的眼睛图标*/
+
+::-ms-clear,
+::-ms-reveal {
+    display: none;
+}
+
+.no-data-tip {
+    color: #a1a1a1;
+    font-size: 12px;
+    text-align: center;
+    padding-top: 40px;
+}

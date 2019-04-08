@@ -1,0 +1,162 @@
+// 刘申云
+$color-word-main:#444; // 字体主色 #444 body/
+$color-bg-main:#F6F8FB; // 内容区主体背景颜色
+$color-active:#3186DC; // 激活状态颜色
+$color-none-active:#899ABE; // 激活状态颜色
+$size-one:12px; // 字体大小
+$size-two:14px; // 字号主要 body/ tbody td
+$size-three:16px; // thead th/
+$size-four:18px;
+$length-body-min-height: 780px; // 窗口最小高度
+$length-body-min-width: 1300px; // 窗口最小高度
+// 侧栏配置
+$color-slide-bg:#3186DC; //侧栏背景颜色
+$color-slide-li-hover:#F2FAFF; // 菜单hover颜色
+$color-slide-word:#444; //侧栏字体颜色
+$color-slide-subword:#888; //侧栏子菜单字体颜色
+$color-slide-wrod-active:$color-none-active; //侧栏字体选中颜色
+// 头部
+$color-header-logo-bg: $color-active;
+// 登录页
+$login-bg-background: linear-gradient(45deg,#0097ff, #66B2FF, #0097ff); //背景色
+
+/*=========== 表格配置start ==========*/
+
+
+/**
+  已经配置的选项：
+  "设备ID"：$length-table-device-id
+  "设备名称"：$length-table-device-name
+  "通讯方式"：$length-table-communicate-type
+  "设备类型"：$length-table-device-type
+  "设备品牌"：$length-table-device-brand
+  "设备状态"：$length-table-device-status
+  "网络状态"：$length-table-network-status
+  "设备型号"：$length-table-device-model
+  "设备系列"：$length-table-device-series
+  "省"：$length-table-province
+  "市"：$length-table-city
+  "区"：$length-table-district
+  "省 + 市 + 区 + 街道"：$length-table-whole-address
+  "服务区域(包含省市区)"：$length-table-area
+  "通讯地址 || 详细地址"：$length-table-address
+  "用户姓名 || 操作人 || 客户名称"：$length-table-user-name
+  "手机号码"：$length-table-telephone
+  "设备终端"：$length-table-device-terminal
+  "设备MAC"：$length-table-device-mac
+  "滤芯ID": $length-table-filter-id
+  "使用状态": $length-table-use-status
+  "滤芯状态": $length-table-filter-status
+  "通知状态": $length-table-inform-status
+  "通知类型": $length-table-inform-type
+  "操作账号": $length-table-handle-account
+  "时间 yyyy-MM-dd hh:mm:ss": $length-table-time-ss  // 时间带年-月-日 时：分：秒的
+  "时间 yyyy-MM-dd": $length-table-time-date  // 时间带年-月-日的
+  "操作 | 编辑": $length-table-handle-edit  // 操作编辑
+  "操作 | 编辑& 删除": $length-table-handle-edit2 // 操作编辑加删除
+  "模板类型": $length-table-template-type
+  "推送渠道": $length-table-push-channel
+  "是否紧急": $length-table-whether-urgent
+  "信息类型": $length-table-info-type
+  "模板||模板名称": $length-table-template-name
+  "信息标题": $length-table-info-title // 【信息推送记录页面】
+  "反馈类型": $length-table-feedback-type // 【用户反馈管理页面 || 】
+  "处理状态": $length-table-feedback-handle-status  // 【用户反馈管理页面 || 】
+  "反馈标题": $length-table-feedback-title  // 【用户反馈管理页面 || 】
+  "反馈内容": $length-table-feedback-con  // 【用户反馈管理页面 || 】
+  "服务单号": $length-table-service-number  // 【待处理订单页面 || 】
+  "服务类型": $length-table-service-type  // 【待处理订单页面 || 】
+  "问题分类": $length-table-question-category  // 【待处理订单页面 || 】
+  "角色类型"：$length-table-role-type // 【服务人员审核页面 || 】
+  "公司|公司名称"：$length-table-company-name // 【服务人员审核页面 || 】
+  "所属代理商"：$length-table-belong-agent // 【前端账号管理 || 】
+  "代理商级别"：$length-table-agent-grade // 【前端账号管理 || 】
+  "员工编号"：$length-table-staff-no // 【前端账号管理 || 】
+  "员工职务"：$length-table-staff-position // 【前端账号管理 || 】
+  "综合评分"：$length-table-composite-score // 【前端账号管理 || 】
+  "固件版本名称"：$length-table-version-name // 【升级管理 || 】
+  "固件版本类型"：$length-table-version-type // 【升级管理 || 】
+  "上传版本号"：$length-table-version-no // 【升级管理 || 】
+  "版本升级说明"：$length-table-upgrade-description // 【升级管理 || 】
+*/
+
+$color-table-td-word:#666; //table td 字颜色  用到
+$color-table-th-word:#898C8E; //table th 字颜色 用到
+$color-thead-tr-bg:#EAF3FB; //table th 背景颜色 用到
+$length-table-xuhao-id:50px; // table th "序号"长度
+$length-table-device-id:100px; // table th "全选"长度
+$length-table-devices-id:100px; // table th "设备ID"长度
+$length-table-device-name:100px; // table th "设备名称"长度
+$length-table-communicate-type:100px; // table th "通讯方式"长度
+$length-table-device-type:100px; // table th "设备类型"长度
+$length-table-device-brand:80px; // table th "设备品牌"长度
+$length-table-device-status:80px; // table th "设备状态"长度
+$length-table-network-status:80px; // table th "网络状态"长度
+$length-table-device-model:100px; // table th "设备型号"长度
+$length-table-device-series:100px; // table th "设备系列"长度
+$length-table-province:100px; // table th "省"长度
+$length-table-city:100px; // table th "市"长度
+$length-table-address:100px; // table th "通讯地址 || 详细地址"长度
+$length-table-whole-address:100px; // table th "省 + 市 + 区 + 街道"长度
+$length-table-district:100px; // table th "区"长度
+$length-table-area:140px; // table th "服务区域(包含省市区)"
+$length-table-user-name:100px; // table th "用户姓名"长度
+$length-table-telephone:116px; // table th "手机号码"长度 ok
+$length-table-device-terminal:80px; // table th "设备终端"长度 ok
+$length-table-device-mac:120px; // table th "设备MAC"长度 ok
+$length-table-filter-id:200px; // table th "滤芯ID"长度
+$length-table-use-status:80px; // table th "使用状态"长度 ok
+$length-table-filter-status:80px; // table th "滤芯状态"长度 ok
+$length-table-inform-status:80px; // table th "通知状态"长度 ok
+$length-table-inform-type:100px; // table th "通知类型"长度 ok
+$length-table-handle-account:100px; // table th "操作账号"长度 ok
+$length-table-time-ss:150px; // table th "时间 yyyy-MM-dd hh:mm:ss"长度
+$length-table-time-date:80px; // table th "时间 yyyy-MM-dd"长度 ok
+$length-table-handle-edit:100px; // table th "操作 | 编辑"长度
+$length-table-handle-edit2:150px; // table th "操作 | 编辑& 删除"长度
+$length-table-template-type:200px; // table th "模板类型"长度
+$length-table-push-channel:200px; // table th "推送渠道"长度
+$length-table-whether-urgent:200px; // table th "是否紧急"长度
+$length-table-info-type:200px; // table th "信息类型"长度
+$length-table-template-name:200px; // table th "模板||模板名称"长度
+$length-table-info-title:200px; // table th "信息标题"长度
+$length-table-feedback-type:90px; // table th "用户反馈类型"长度 ok
+$length-table-feedback-handle-status:80px; // table th "用户反馈处理状态"长度 // ok
+$length-table-feedback-title:200px; // table th "用户反馈标题"长度
+$length-table-feedback-con:140px; // table th "用户反馈内容"长度 // ok
+$length-table-service-number:140px; // table th "服务单号"长度 ok
+$length-table-service-type:80px; // table th "服务类型"长度 ok
+$length-table-question-category:80px; // table th "问题分类"长度 ok
+$length-table-role-type:110px; // table th "角色类型"长度 ok
+$length-table-company-name:200px; // table th "公司|公司名称"长度
+$length-table-belong-agent:100px; // table th "所属代理商"长度
+$length-table-agent-grade:100px; // table th "代理商级别"长度
+$length-table-staff-no:100px; // table th "员工编号"长度
+$length-table-staff-position:100px; // table th "员工职务"长度
+$length-table-composite-score:70px; // table th "综合评分"长度
+$length-table-version-name:120px; // table th "固件版本名称"长度
+$length-table-version-type:120px; // table th "固件版本类型"长度
+$length-table-version-no:100px; // table th "上传版本号"长度
+$length-table-upgrade-description:140px; // table th "版本升级说明"长度
+
+/*=========== 表格配置end ==========*/
+
+// $color-tbody-tr-bg:#FAFAFA; //table th 背景颜色 用到
+$color-tbody-tr-odd-bg: #FAFAFA; // table th 奇数列背景颜色
+$color-tbody-tr-even-bg: #FFF; // table th 偶数列背景颜色
+// 按钮
+$color-btn-bg: $color-slide-wrod-active; // 正常button背景色
+$color-btn :#FFF; // 正常button字体颜色
+$color-btn-danger-bg:#E65545; // 提示
+// form
+$color-form-placeholder: #B3B3B3; // placeholder 字体颜色
+$scolor-form-color: $color-word-main; // form输入的字体颜色
+$color-form-border: #D4D4D4; // form border颜色
+// 图标 chart
+$color-chart-line-title: #444; // 线性图表标题颜色
+$size-chart-line-title: $size-three; //  线性图表标题字体大小
+$color-day: #888; // 日月周未选中颜色
+$color-day-checked: $color-slide-wrod-active; // 日月周选中颜色
+$size-day: $size-two; // 日月周字体大小
+$color-chart-x-y:#B3B3B3; // 坐标轴字体颜色
+$size-chart-x-y:$size-two; // 坐标轴字体大小

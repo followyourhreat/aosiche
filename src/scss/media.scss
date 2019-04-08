@@ -1,0 +1,36 @@
+@media screen and (max-width: 1200px) {
+  #navBar {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0, 1);
+    transform: translate(-170px, 0);
+    .nav_item:hover {
+      transform: translateX(210px);
+      background-color: rgba(0, 0, 0, 0.8);
+      &:before {
+        border-right-color: rgba(0, 0, 0, 0.8);
+        border-left-color: rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+  .main {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0, 1);
+    left: 30px;
+    .header {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0, 1);
+      left: 30px;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #navBar {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0, 1);
+  }
+  .main {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0, 1);
+    left: 200px;
+    .header {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0, 1);
+      left: 200px;
+    }
+  }
+}

@@ -1,0 +1,105 @@
+@import '../scss/constant.style.scss';
+$cell-line-height:30px;
+.dt-search-cell {
+    .dt-search-con .el-date-editor.el-input {
+        width: 100%;
+    }
+    .el-input__icon {
+        line-height: $cell-line-height;
+    }
+}
+
+
+/* 头部查询的样式 start */
+
+.dt-search-top {
+    height: auto;
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+
+.dt-search-cell {
+    height: 30px;
+    float: left;
+    margin: 0 20px 10px 0;
+    line-height: 30px;
+    .dt-search-title,
+    .dt-search-con {
+        display: inline-block;
+        height: 100%;
+        // 下来框样式重置
+        .el-input__inner {
+            height: 30px;
+            font-size: 12px;
+            border-radius: 4px;
+            border: 1px solid $color-form-border;
+            color: $scolor-form-color;
+            &::-webkit-input-placeholder,
+            &::-ms-input-placeholder,
+            &::-moz-placeholder {
+                color: $color-form-placeholder;
+            }
+        }
+        // cascader 三级联动样式重置
+        .el-cascader--large .el-cascader__label {
+            line-height: 30px;
+            height: 30px;
+        }
+    }
+    .dt-search-con {
+        min-width: 76px;
+    }
+    .dt-btn {
+        height: 30px;
+        line-height: 29px;
+    }
+}
+
+.slide-page-outer {
+    .dt-search-cell {
+        .dt-search-title {
+            display: inline-block;
+            min-width: 72px;
+        }
+    }
+}
+
+
+/* 头部查询的样式 end */
+
+// 分页样式重置开始
+.dt-page-reset {
+    &.el-pagination {
+        color: #626466;
+        text-align: right;
+    }
+}
+
+// 分页样式重置结束
+.set-time-w {
+    .el-date-editor .el-range-separator {
+        min-width: 20px;
+    }
+}
+
+body .el-scrollbar__wrap {
+    overflow-x: hidden!important;
+}
+
+body .el-select-dropdown__list {
+    padding-bottom: 16px;
+}
+
+body .el-checkbox__input.is-checked+.el-checkbox__label {
+    color: $color-active
+}
+
+body .el-checkbox__input.is-checked .el-checkbox__inner {
+    border-color: $color-active;
+    background-color: $color-active;
+}
+
+// steps reset
+.order-li-info .el-steps--vertical {
+    width: 100%;
+}
