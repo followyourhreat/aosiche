@@ -336,7 +336,12 @@ export const ElSelectOption = {
     { value: '1', label: '代理分润' },
     { value: '2', label: '介绍分润' },
     { value: '3', label: '用户分润' }
-  ]
+  ],
+  filterStatus2: [ // 设备状态(1全部2正常3需更换) zengbin add
+    { value: '1', label: '全部' },
+    { value: '2', label: '在线' },
+    { value: '3', label: '离线' }
+  ],
 };
 
 export const MaxLengthConfig = {

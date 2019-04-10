@@ -98,7 +98,7 @@ const UploadifyUploadBin = (file, callback) => {
 /* ======  登陆  ======= */
 // 用户登陆
 const accountLogin = (username, password, callback) => {
-  fetch(apiUrl.accountLogin, { 'username': aesEncrypt(username), 'password': aesEncrypt(password) }).then(msg => {
+  fetch(apiUrl.accountLogin, { 'account': username, 'password': password }).then(msg => {
     SuccessTips('登录成功', () => { callback && callback(msg) })
   })
 };
@@ -118,35 +118,35 @@ const serviceAccountFrontList = (params, callback) => {
 
 // service_account_front - 新增
 const serviceAccountFrontAdd = (params, callback) => {
-  let vArr = [
-    ['name', params.name, '姓名', 'empty'],
-    ['mobile', params.mobile, '手机号码', 'empty|phone']
-  ];
-  let _Validated = Validate(vArr);
-  if (!_Validated) { return; }
-  fetch(apiUrl.serviceAccountFrontAdd, params).then((msg) => {
-    SuccessTips('添加成功', () => { callback && callback(msg); })
-  })
-}
-// service_account_front - 编辑
+    let vArr = [
+      ['name', params.name, '姓名', 'empty'],
+      ['mobile', params.mobile, '手机号码', 'empty|phone']
+    ];
+    let _Validated = Validate(vArr);
+    if (!_Validated) { return; }
+    fetch(apiUrl.serviceAccountFrontAdd, params).then((msg) => {
+      SuccessTips('添加成功', () => { callback && callback(msg); })
+    })
+  }
+  // service_account_front - 编辑
 const serviceAccountFrontEdit = (params, callback) => {
-  let vArr = [
-    ['name', params.name, '姓名', 'empty'],
-    ['mobile', params.mobile, '手机号码', 'empty|phone']
-  ];
-  let _Validated = Validate(vArr);
-  if (!_Validated) { return; }
-  fetch(apiUrl.serviceAccountFrontEdit, params).then((msg) => {
-    SuccessTips('编辑成功', () => { callback && callback(msg); })
-  })
-}
-// service_account_front - 删除
+    let vArr = [
+      ['name', params.name, '姓名', 'empty'],
+      ['mobile', params.mobile, '手机号码', 'empty|phone']
+    ];
+    let _Validated = Validate(vArr);
+    if (!_Validated) { return; }
+    fetch(apiUrl.serviceAccountFrontEdit, params).then((msg) => {
+      SuccessTips('编辑成功', () => { callback && callback(msg); })
+    })
+  }
+  // service_account_front - 删除
 const serviceAccountFrontDelete = (params, callback) => {
-  fetch(apiUrl.serviceAccountFrontDelete, params).then((msg) => {
-    SuccessTips('删除成功', () => { callback && callback(msg); })
-  })
-}
-// service_account_front - 详情
+    fetch(apiUrl.serviceAccountFrontDelete, params).then((msg) => {
+      SuccessTips('删除成功', () => { callback && callback(msg); })
+    })
+  }
+  // service_account_front - 详情
 const serviceAccountFrontDetail = (params, callback) => {
   fetch(apiUrl.serviceAccountFrontDetail, params).then(msg => { callback && callback(msg) })
 }
@@ -317,7 +317,7 @@ const accountAgentEdit = (params, callback) => {
   if (!_Validated) {
     return;
   }
-  let _urlData = Object.assign({'id': _params.id}, params, {
+  let _urlData = Object.assign({ 'id': _params.id }, params, {
     'username': aesEncrypt(_params.username),
     'password': _params.password ? aesEncrypt(_params.password) : ''
   })
@@ -452,11 +452,11 @@ const DeviceDeviceOperateLog = (deviceId, page, callback) => {
 };
 // Filter - 设备导入
 const DeviceImport = (params, callback) => {
-  fetch(apiUrl.DeviceImport, params).then(msg => {
-    SuccessTips('导入成功', () => { callback && callback(msg) });
-  })
-}
-// Device - 导出设备
+    fetch(apiUrl.DeviceImport, params).then(msg => {
+      SuccessTips('导入成功', () => { callback && callback(msg) });
+    })
+  }
+  // Device - 导出设备
 const exportDevice = (deviceId, callback) => {
   fetch(apiUrl.exportDevice, { 'device_id': deviceId }).then(msg => {
     SuccessTips('导出成功', () => { callback && callback(msg) })
@@ -960,9 +960,9 @@ const UserRxportUsers = (uidStr, callback) => {
 };
 /* ==== 财务部分 => 财务管理部分 ==== */
 const financeIndex = (params, callback) => {
-  fetch(apiUrl.financeIndex, params).then(msg => { callback && callback(msg) });
-}
-// 导出财务列表
+    fetch(apiUrl.financeIndex, params).then(msg => { callback && callback(msg) });
+  }
+  // 导出财务列表
 const financeExportData = (deviceId, callback) => {
   fetch(apiUrl.financeExportData, { 'id': deviceId }).then(msg => {
     SuccessTips('导出成功', () => { callback && callback(msg) })
@@ -990,14 +990,14 @@ const financePassAudit = (params, callback) => {
   });
 }
 const financeGetRequest = (params, callback) => {
-  fetch(apiUrl.financeGetRequest, params).then(msg => { callback && callback(msg) });
-}// 导出财务列表
+    fetch(apiUrl.financeGetRequest, params).then(msg => { callback && callback(msg) });
+  } // 导出财务列表
 const financeExportAuditData = (params, callback) => {
-  fetch(apiUrl.financeExportAuditData, params).then(msg => {
-    SuccessTips('导出成功', () => { callback && callback(msg) })
-  });
-}
-/* ==== 财务部分 => 分润记录 ==== */
+    fetch(apiUrl.financeExportAuditData, params).then(msg => {
+      SuccessTips('导出成功', () => { callback && callback(msg) })
+    });
+  }
+  /* ==== 财务部分 => 分润记录 ==== */
 const financeRecordGetList = (params, callback) => {
   fetch(apiUrl.financeRecordGetList, params).then(msg => { callback && callback(msg) });
 }
@@ -1032,10 +1032,10 @@ const financeBonusEdit = (params, callback) => {
   fetch(apiUrl.financeBonusEdit, params).then(msg => { callback && callback(msg) });
 }
 const financeBonusDel = (params, callback) => {
-  fetch(apiUrl.financeBonusDel, params).then(msg => { callback && callback(msg) });
-}
-/* ==== 系统设置部分 => 参数设置 ==== */
-// System - 保存勾选要展示的面板
+    fetch(apiUrl.financeBonusDel, params).then(msg => { callback && callback(msg) });
+  }
+  /* ==== 系统设置部分 => 参数设置 ==== */
+  // System - 保存勾选要展示的面板
 const SystemSaveBoards = (idsStr, callback) => {
   fetch(apiUrl.SystemSaveBoards, { 'board_ids': idsStr }).then(msg => {
     SuccessTips('保存成功', () => { callback && callback(msg) })
@@ -1049,114 +1049,114 @@ const SystemAccountBoards = (callback) => {
 
 // System - 3.获取所有面板
 const SystemBoards = (callback) => {
-  fetch(apiUrl.SystemBoards, {}).then(msg => { callback && callback(msg) })
-}
-/* ==== 系统设置部分 => 品牌管理 ==== */
-// 品牌管理 - 获取列表
+    fetch(apiUrl.SystemBoards, {}).then(msg => { callback && callback(msg) })
+  }
+  /* ==== 系统设置部分 => 品牌管理 ==== */
+  // 品牌管理 - 获取列表
 const SystemBrandList = (params, callback) => {
-  fetch(apiUrl.SystemBrandList, params).then(msg => { callback && callback(msg) })
-}
-// 品牌管理 -下拉选择
+    fetch(apiUrl.SystemBrandList, params).then(msg => { callback && callback(msg) })
+  }
+  // 品牌管理 -下拉选择
 const SystemBrandListOption = (params, callback) => {
-  fetch(apiUrl.SystemBrandListOption, params).then(msg => { callback && callback(msg) })
-}
-// 品牌管理 - 新增
+    fetch(apiUrl.SystemBrandListOption, params).then(msg => { callback && callback(msg) })
+  }
+  // 品牌管理 - 新增
 const SystemBrandAdd = (params, callback) => {
-  // let _params = params;
-  // let vArr = [
-  //   ['enterprise_id', _params.enterprise_id, '企业', 'empty']
-  // ];
-  // let _Validated = Validate(vArr);
-  // if (!_Validated) { return; }
-  fetch(apiUrl.SystemBrandAdd, params).then(msg => {
-    SuccessTips('新增成功', () => { callback && callback(msg) })
-  })
-}
-// 品牌管理 - 编辑
+    // let _params = params;
+    // let vArr = [
+    //   ['enterprise_id', _params.enterprise_id, '企业', 'empty']
+    // ];
+    // let _Validated = Validate(vArr);
+    // if (!_Validated) { return; }
+    fetch(apiUrl.SystemBrandAdd, params).then(msg => {
+      SuccessTips('新增成功', () => { callback && callback(msg) })
+    })
+  }
+  // 品牌管理 - 编辑
 const SystemBrandEdit = (params, callback) => {
-  fetch(apiUrl.SystemBrandEdit, params).then(msg => {
-    SuccessTips('编辑成功', () => { callback && callback(msg) })
-  })
-}
-/* ==== 系统设置部分 => 系列管理 ==== */
-// 系列管理 - 获取列表
+    fetch(apiUrl.SystemBrandEdit, params).then(msg => {
+      SuccessTips('编辑成功', () => { callback && callback(msg) })
+    })
+  }
+  /* ==== 系统设置部分 => 系列管理 ==== */
+  // 系列管理 - 获取列表
 const SystemSeriesList = (params, callback) => {
-  fetch(apiUrl.SystemSeriesList, params).then(msg => { callback && callback(msg) })
-}
-// 系列管理 - 下拉选择
+    fetch(apiUrl.SystemSeriesList, params).then(msg => { callback && callback(msg) })
+  }
+  // 系列管理 - 下拉选择
 const SystemSeriesListOption = (params, callback) => {
-  fetch(apiUrl.SystemSeriesListOption, params).then(msg => { callback && callback(msg) })
-}
-// 系列管理 - 新增
+    fetch(apiUrl.SystemSeriesListOption, params).then(msg => { callback && callback(msg) })
+  }
+  // 系列管理 - 新增
 const SystemSeriesAdd = (params, callback) => {
-  let _params = params;
-  let vArr = [
-    ['brand_id', _params.brand_id, '品牌', 'empty']
-  ];
-  let _Validated = Validate(vArr);
-  if (!_Validated) { return; }
-  fetch(apiUrl.SystemSeriesAdd, params).then(msg => {
-    SuccessTips('新增成功', () => { callback && callback(msg) })
-  })
-}
-// 系列管理 - 编辑
+    let _params = params;
+    let vArr = [
+      ['brand_id', _params.brand_id, '品牌', 'empty']
+    ];
+    let _Validated = Validate(vArr);
+    if (!_Validated) { return; }
+    fetch(apiUrl.SystemSeriesAdd, params).then(msg => {
+      SuccessTips('新增成功', () => { callback && callback(msg) })
+    })
+  }
+  // 系列管理 - 编辑
 const SystemSeriesEdit = (params, callback) => {
-  fetch(apiUrl.SystemSeriesEdit, params).then(msg => {
-    SuccessTips('编辑成功', () => { callback && callback(msg) })
-  })
-}
-/* ==== 系统设置部分 => 型号管理 ==== */
-// 型号管理 - 获取列表
+    fetch(apiUrl.SystemSeriesEdit, params).then(msg => {
+      SuccessTips('编辑成功', () => { callback && callback(msg) })
+    })
+  }
+  /* ==== 系统设置部分 => 型号管理 ==== */
+  // 型号管理 - 获取列表
 const SystemModelSetList = (params, callback) => {
-  fetch(apiUrl.SystemModelSetList, params).then(msg => { callback && callback(msg) })
-}
-// 型号管理 - 下拉选择
+    fetch(apiUrl.SystemModelSetList, params).then(msg => { callback && callback(msg) })
+  }
+  // 型号管理 - 下拉选择
 const SystemModelSetListOption = (params, callback) => {
-  fetch(apiUrl.SystemModelSetListOption, params).then(msg => { callback && callback(msg) })
-}
-// 型号管理 - 新增
+    fetch(apiUrl.SystemModelSetListOption, params).then(msg => { callback && callback(msg) })
+  }
+  // 型号管理 - 新增
 const SystemModelSetAdd = (params, callback) => {
-  let _params = params;
-  let vArr = [
-    ['series_id', _params.series_id, '系列', 'empty']
-  ];
-  let _Validated = Validate(vArr);
-  if (!_Validated) { return; }
-  fetch(apiUrl.SystemModelSetAdd, params).then(msg => {
-    SuccessTips('新增成功', () => { callback && callback(msg) })
-  })
-}
-// 型号管理 - 编辑
+    let _params = params;
+    let vArr = [
+      ['series_id', _params.series_id, '系列', 'empty']
+    ];
+    let _Validated = Validate(vArr);
+    if (!_Validated) { return; }
+    fetch(apiUrl.SystemModelSetAdd, params).then(msg => {
+      SuccessTips('新增成功', () => { callback && callback(msg) })
+    })
+  }
+  // 型号管理 - 编辑
 const SystemModelSetEdit = (params, callback) => {
-  fetch(apiUrl.SystemModelSetEdit, params).then(msg => {
-    SuccessTips('编辑成功', () => { callback && callback(msg) })
-  })
-}
-/* ==== 系统设置部分 => 批次管理 ==== */
-// 批次管理 - 获取列表
+    fetch(apiUrl.SystemModelSetEdit, params).then(msg => {
+      SuccessTips('编辑成功', () => { callback && callback(msg) })
+    })
+  }
+  /* ==== 系统设置部分 => 批次管理 ==== */
+  // 批次管理 - 获取列表
 const SystemBatchList = (params, callback) => {
-  fetch(apiUrl.SystemBatchList, params).then(msg => { callback && callback(msg) })
-}
-// 批次管理 - 新增
+    fetch(apiUrl.SystemBatchList, params).then(msg => { callback && callback(msg) })
+  }
+  // 批次管理 - 新增
 const SystemBatchAdd = (params, callback) => {
-  fetch(apiUrl.SystemBatchAdd, params).then(msg => {
-    SuccessTips('新增成功', () => { callback && callback(msg) })
-  })
-}
-// 批次管理 - 批量导入
+    fetch(apiUrl.SystemBatchAdd, params).then(msg => {
+      SuccessTips('新增成功', () => { callback && callback(msg) })
+    })
+  }
+  // 批次管理 - 批量导入
 const SystemBatchImport = (params, callback) => {
-  let _params = params;
-  let vArr = [
-    ['model_id', _params.model_id, '型号', 'empty']
-  ];
-  let _Validated = Validate(vArr);
-  if (!_Validated) { return; }
-  fetch(apiUrl.SystemBatchImport, params).then(msg => {
-    SuccessTips('导入成功', () => { callback && callback(msg) })
-  })
-}
-/* ==== 租赁管理部分 => 租赁规则列表 ==== */
-// lease - 1.获取租赁规则表
+    let _params = params;
+    let vArr = [
+      ['model_id', _params.model_id, '型号', 'empty']
+    ];
+    let _Validated = Validate(vArr);
+    if (!_Validated) { return; }
+    fetch(apiUrl.SystemBatchImport, params).then(msg => {
+      SuccessTips('导入成功', () => { callback && callback(msg) })
+    })
+  }
+  /* ==== 租赁管理部分 => 租赁规则列表 ==== */
+  // lease - 1.获取租赁规则表
 const leaseLeaseList = (params, callback) => {
   fetch(apiUrl.leaseLeaseList, params).then(msg => { callback && callback(msg) })
 }
@@ -1282,7 +1282,54 @@ const DeviceLog = (params, callback) => {
   fetch('upgrade_log/get_upgrade_log', params).then(msg => { callback && callback(msg) })
 };
 
+
+//dlw
+//獲取搜索訂單
+const Orderall = (params, callback) => {
+  fetch(apiUrl.Orderall, params).then(msg => { callback && callback(msg) })
+};
+
+const gettoken = (callback) => {
+  fetch(apiUrl.gettoken).then(msg => {
+    callback && callback(msg)
+  })
+};
+//获取所有用户列表信息
+const getAll = (params, callback) => {
+  fetch(apiUrl.getAll, params).then(msg => { callback && callback(msg) })
+};
+//重置密码
+const reset = (params, callback) => {
+  fetch(apiUrl.reset, params).then(msg => { callback && callback(msg) })
+};
+//编辑用户信息
+const up_user = (params, callback) => {
+  fetch(apiUrl.up_user, params).then(msg => { callback && callback(msg) })
+};
+//新增用户
+const add_user = (params, callback) => {
+  fetch(apiUrl.add_user, params).then(msg => { callback && callback(msg) })
+};
+//冻结用户
+const frost = (params, callback) => {
+  fetch(apiUrl.frost, params).then(msg => { callback && callback(msg) })
+};
+//device设备列表1
+const deviceAll = (params, callback) => {
+  fetch(apiUrl.deviceAll, params).then(msg => {
+    callback && callback(msg)
+  })
+};
 export default {
+  //dlw
+  Orderall,
+  gettoken,
+  getAll,
+  reset,
+  up_user,
+  add_user,
+  frost,
+  deviceAll,
   SuccessTips,
   GetApplyId, // 获取apply-id
   accountInitPwd, // 初始化账号密码
@@ -1295,6 +1342,7 @@ export default {
   UploadifyUploadImage, // Uploadify - 上传图片
   UploadifyUploadBin, // Uploadify - 上传图片
   accountLogin,
+
   accountLogout,
   /* ======  账号管理部分 => 服务账号管理  ======= */
   serviceAccountFrontList, // service_account_front - 获取服务账号申请列表(服务人员审核列表)

@@ -9,7 +9,7 @@ const apiUrl = {
   'UploadifyUploadImage': 'Uploadify/upload_image', // Uploadify - 上传图片
   'UploadifyUploadImageByWangEditor': 'Uploadify/upload_image_by_wangEditor', // Uploadify - 上传图片(wangEditor富文本)
   // 登录部分
-  'accountLogin': 'account/login', // 登录
+  'accountLogin': 'user/login', // 登录
   'accountLogout': 'account/logout', // 登出
   // 'accountToken':'token/get_token',//获取token
   /* ==== 账号管理部分 ==== */
@@ -201,7 +201,21 @@ const apiUrl = {
   'OssUploadGetPostObjectParams': 'Oss_upload/get_post_object_params', // Oss_upload - 获取OSS表单上传参数
   /* ==== 系统日志部分 ==== */
   'AccountAssignGetAssignLog': 'Account_assign/get_assign_log', // Account_assign - 获取分配记录
-  'LoginLogGetLoginLog': 'Login_log/get_login_log' // Login_log - 人员登录信息
+  'LoginLogGetLoginLog': 'Login_log/get_login_log', // Login_log - 人员登录信息
+
+
+
+  // dlw
+  'Orderall': 'order/orderAll', // Fault_repair - 获取待处理订单列表
+  'gettoken': 'token/get_token', //  - 获取待处理订单列表
+
+  //账号管理列表
+  'getAll': 'user/getAll', //获取用户列表
+  'reset': 'user/init_pwd', //重置密码
+  'up_user': 'user/up_user', //编辑用户
+  'add_user': 'user/add_user', //新增用户
+  'frost': 'user/frost', //冻结 禁用用户
+  'deviceAll': 'device/deviceAll', //获取智能设备管理列表
 }
 
 export default apiUrl;

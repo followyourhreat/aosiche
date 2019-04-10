@@ -11,11 +11,14 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 // 全局ajax请求拦截器
 // POST传参序列化
 axios.interceptors.request.use((config) => {
-  // config.headers.zwtUserId=localStorage.getItem('zw-token');
-  // config.data={
-  //   zwtMenuId:localStorage.getItem('zw-token'),
-  //   ...config.data
-  // };
+  config.headers.token = localStorage.getItem('aotoken');
+  // config.headers.userid=localStorage.getItem('aoid');
+  config.data = {
+
+    userid: localStorage.getItem('aoid'),
+    ...config.data
+  };
+
   if (config.method === 'post') {
     config.data = qs.stringify(config.data)
   }
@@ -28,11 +31,17 @@ const _openLoading = () => { Store.dispatch('showLoading', true) };
 
 const fetchs = (url, params = {}, user = true) => {
   params = formatParams(params); // 参数序列化
-  if (url !== 'account/login') {
-    let _accessToken = localStorage.getItem('Three-Access_Token');
-    axios.defaults.headers['Access-Token'] = _accessToken;
+  if (url !== 'user/login') {
+    let aotoken = localStorage.getItem('aotoken');
+    let aoid = localStorage.getItem('aoid');
+    axios.defaults.headers['Access-Token'] = aotoken;
+    axios.defaults.headers['access_token'] = aotoken;
+    axios.defaults.headers['check_login'] = aoid;
+    // console.log(aotoken)
+    // console.log(aoid)
   } else {
-    axios.defaults.headers['Access-Token'] = '';
+    axios.defaults.headers['token'] = '';
+    axios.defaults.headers['userid'] = '';
   }
   setTimeout(_openLoading, 0);
   setTimeout(_closeLoading, 30000); // 防止接口报错，后台30s不返回数据，过30s后loading消失
@@ -42,7 +51,7 @@ const fetchs = (url, params = {}, user = true) => {
         setTimeout(_closeLoading, 500);
         let _reData = response.data;
         if (_reData.errcode !== 0) {
-          if (_reData.errcode === 400006) {
+          if (_reData.errcode === 400006 || _reData.errcode === 4001) {
             window.location.href = 'index.html';
             return;
           }

@@ -18,7 +18,7 @@ export const lineChart = (param) => {
     chart: {
       backgroundColor: '#FFF',
       // type: 'area',
-      type: 'line',
+      type: 'spline',
       // defaultSeriesType: 'area',
       zoomType: 'x',
       spacingLeft: 5,
@@ -101,13 +101,13 @@ export const lineChart = (param) => {
       name: param.name,
       data: param.data,
       marker: {
-        fillColor: '#ccc',
+        fillColor: '#fff',
         lineWidth: 2,
-        lineColor: null, // 颜色为空 默认圆圈是colors颜色
-        enabled: true,
-        symbol: 'diamond'
+        lineColor: "#EB9054", // 颜色为空 默认圆圈是colors颜色
+        enabled: false,
+        // symbol: 'diamond'
       },
-      lineWidth: 1 // 线条宽度
+      lineWidth: 4 // 线条宽度
     }]
   });
 };

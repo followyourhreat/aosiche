@@ -2,7 +2,15 @@
   <div class="dt-search-cell">
     <i v-if="hasSearchTitle" class="dt-search-title">{{titleValue}}：</i>
     <span class="dt-search-con" :style="{'width':conWidth+'px'}">
-      <input :type="inputType" :disabled='disableValue' :placeholder="placeholderValue" v-bind:maxlength="inputLength" v-model="value" class="dt-input" v-on:input="inputChange">
+      <input
+        :type="inputType"
+        :disabled="disableValue"
+        :placeholder="placeholderValue"
+        v-bind:maxlength="inputLength"
+        v-model="value"
+        class="dt-input"
+        v-on:input="inputChange"
+      >
     </span>
   </div>
 </template>
@@ -10,7 +18,7 @@
 <script>
 // import { inputMaxLength } from '../../global/constant';
 export default {
-  name: 'dtSearchInput',
+  name: "dtSearchInput",
   data() {
     return {
       value: this.defaultValue,
@@ -19,7 +27,7 @@ export default {
       disableValue: this.disabled,
       inputLength: this.maxLength,
       conWidth: this.inputWidth
-    }
+    };
   },
   props: {
     defaultValue: {
@@ -36,7 +44,7 @@ export default {
     },
     inputType: {
       type: String,
-      default: 'text'
+      default: "text"
     },
     hasSearchTitle: {
       type: Boolean,
@@ -67,16 +75,16 @@ export default {
   },
   methods: {
     inputChange(value) {
-      this.$emit('inputChange', value.target.value);
+      this.$emit("inputChange", value.target.value);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
 .dt-search-con {
-  input:focus{
-    border-color: #409EFF;
+  input:focus {
+    border-color: #409eff;
   }
 }
 </style>

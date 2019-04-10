@@ -4,48 +4,13 @@
       <div class="logo-fotert">登录/login</div>
       <div class="login-con-inner">
         <!-- <p>账号：</p> -->
-        <!-- <Form class="loginForm" ref="form" :model="formData" :rules="rules" :label-width="0">
-          <FormItem label prop="account" class="log-account">
-            <Input v-model.trim="formData.account" class="dt-input" placeholder="请输入用户名"></Input>
-          </FormItem>
-          <FormItem label prop="password" v-if="!eye" class="log-psd">
-            <Input
-              v-model.trim="formData.password"
-              placeholder="请输入密码"
-              type="password"
-              :maxlength="18"
-              class="dt-input"
-            >
-              <span slot="append">
-                <Icon type="eye-disabled" @click.native="handleEye"></Icon>
-              </span>
-            </Input>
-          </FormItem>
-          <FormItem label prop="password" v-if="eye">
-            <Input v-model.trim="formData.password" placeholder="请输入密码" :maxlength="18">
-              <span slot="prepend">密码：</span>
-              <span slot="append">
-                <Icon type="eye" @click.native="handleEye"></Icon>
-              </span>
-            </Input>
-          </FormItem>
-          <FormItem label prop="remember">
-            <div class="remember">
-              <Checkbox v-model="remember">记住密码</Checkbox>
-              <div style="cursor: pointer" @click="handleRouter('forget')">忘记密码</div>
-            </div>
-          </FormItem>
-          <FormItem label>
-            <Button type="primary" class="dt-btn" long @click="handleLogin">登录</Button>
-          </FormItem>
-        </Form>-->
         <div class="log-account">
           <i></i>
           <span>
             <input type="text" class="dt-input" placeholder="请输入账号" v-model="username">
           </span>
         </div>
-
+        <!-- <p>密码：</p> -->
         <div class="log-psd">
           <i></i>
           <span>
@@ -58,7 +23,7 @@
             >
           </span>
         </div>
-
+        <!-- <p class="log-err-tip">{{errWord}}</p> -->
         <button type="button" class="dt-btn" style="width:100%" @click="submit()">登 录</button>
       </div>
     </div>
@@ -67,47 +32,26 @@
 
 <script>
 const USER_NAME_REG = /^[a-zA-Z0-9_]{3,15}$/;
-// import _MenuList from "../global/menulist";
-// import { aesEncrypt } from "../utils/dtAes";
 export default {
   data() {
     return {
-      // eye: false,
-      // remember: true,
-      // formData: {
-      //   account: "",
-      //   password: ""
-      // },
-      // rules: {}
       username: "",
       password: "",
       errWord: ""
     };
   },
-  mounted() {
-    // this.remember = localStorage.getItem("remember") == "true" ? true : false;
-    // if (this.remember) {
-    //   this.formData.account = localStorage.getItem("account");
-    //   this.formData.password = localStorage.getItem("password");
-    // }
+  mounted: function() {
+    this.$http.gettoken(msg => {
+      if (msg.errcode == 0) {
+        localStorage.setItem("aotoken", msg.data);
+      }
+    });
   },
-  methods: {
-    // handleEye() {
-    //   this.eye = !this.eye;
-    // },
-    // handleLogin() {
-    //   //缓存
-    //   localStorage.setItem("remember", this.remember ? "true" : "false");
-    //   localStorage.setItem("account", this.formData.account);
-    //   localStorage.setItem("password", this.formData.password);
-    //   this.$post("user/login", this.formData).then(res => {
-    //     this.$store.dispatch("setUserInfoAction", res.data);
-    //     this.$message.success("登录成功");
-    //     this.$router.push({ name: "device-summary" });
-    //   });
-    // },
 
+  methods: {
     submit() {
+      console.log(this.username);
+
       if (!USER_NAME_REG.test(this.username)) {
         this.errWord = "账号格式不正确";
         this.$message.warning("账号格式不正确");
@@ -119,29 +63,17 @@ export default {
         return;
       }
       this.errWord = "";
-      // this.getMenuList();
-      this.$router.push({ name: "device-summary" });
-      alert(1);
-      // this.$http.accountLogin(this.username, this.password, msg => {
-      //   let _accessToken = msg.data.access_token;
-      //   let _applyId = msg.data.id;
-      //   localStorage.setItem('Three-Access_Token', _accessToken);
-      //   localStorage.setItem('Three-Apply_Id', _applyId);
-      // })
+      this.$http.accountLogin(this.username, this.password, msg => {
+        //         let aoid=mes.data.id
+        localStorage.setItem("aoid", msg.data.id);
+        localStorage.setItem("power", msg.data.power);
+        localStorage.setItem("accountnum", this.username);
+        localStorage.setItem("aousername", msg.data.username);
+        if (msg.errcode == 0) {
+          this.$router.push({ name: "device-summary" });
+        }
+      });
     }
-    // getMenuList() { // 获取左侧测单列表
-    //   // this.$http.menuGetList(msg => {
-    //   //   let _menuList = msg.data;
-    //   //   localStorage.setItem('ku_wa_Menu_list', aesEncrypt(JSON.stringify(_menuList)));
-    //   //   let _href = '';
-    //   //   if (_menuList[0].child.length > 0) {
-    //   //     _href = _menuList[0].child[0].href;
-    //   //   } else {
-    //   //     _href = _menuList[0].href;
-    //   //   };
-    //   //   this.$router.push({ name: _href });
-    //   // })
-    // }
   }
 };
 </script>
@@ -241,8 +173,5 @@ export default {
     border: 1px solid #3186dc;
     margin-top: 10px;
   }
-}
-.remember > div {
-  float: right;
 }
 </style>

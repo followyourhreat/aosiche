@@ -817,3 +817,26 @@ input.dt-input[type='password']::-ms-input-placeholder {
 
 
 /* =============== 登陆页  end ================*/
+
+// 账户管理
+.el-table thead,
+.el-table th {
+    background: #EAF3FB !important;
+}
+
+.el-form-item__content .el-input__inner {
+    height: 30px !important;
+    line-height: 30px !important;
+}
+
+.el-form-item__label {
+    line-height: 30px;
+}
+
+.el-form-item {
+    margin-bottom: 15px;
+}
+
+.el-dialog {
+    border-radius: 5px;
+}
