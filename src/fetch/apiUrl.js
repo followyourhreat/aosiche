@@ -208,14 +208,53 @@ const apiUrl = {
   // dlw
   'Orderall': 'order/orderAll', // Fault_repair - 获取待处理订单列表
   'gettoken': 'token/get_token', //  - 获取待处理订单列表
+  "logall" : "Log/LogAll",//获取日志
+  "addorder":"order/add_order",//发起订单
+  "logoff":"user/log_off",
+  "audit":"order/audit",//审核订单
+  "orderpay":"order/order_pay",//支付订单
+  "polls":"order/poll",//查询订单是否交易成功
+  "activegraph":"index/active_graph",//首页曲线
 
-  //账号管理列表
+
+
+
+  "getlog":"log/get_log",//搜索日志
+  "getorder":"order/get_order",//查询订单状态
+
+
+
+
+  //llx
+  'deviceAll' : 'device/deviceAll', //获取智能设备管理列表
+  'indexInfo' : 'index/info' , //获取首页列表
+  'addDevice': 'device/add_device' ,//添加设备
+  'frost' : 'device/frost', //删除设备
+  'Upgrade': 'device/device_upgrade', //设备升级
+  // 'ExportDevice': 'device/export_device', //导出设备
+  'getDevice': 'device/get_device', //筛选设备
+  'editorDevice': 'device/up_device', //编辑设备
+  'pushDevice':'push/record',//预通知记录
+  'pushGetAll':'push/getAll',//获取设备次数到期提醒列表
+  'pushDelete': 'push/del_msg',//批量删除到期提醒的数据处理
+  'pushMessage': 'push/send_msg',//短信推送
+
+
+  //账号管理列表 zengbin
   'getAll': 'user/getAll', //获取用户列表
   'reset': 'user/init_pwd', //重置密码
   'up_user': 'user/up_user', //编辑用户
   'add_user': 'user/add_user', //新增用户
-  'frost': 'user/frost', //冻结 禁用用户
-  'deviceAll': 'device/deviceAll', //获取智能设备管理列表
+  'userSearch': 'user/get_user', //查询用户
+  'userfrost': 'user/frost', //冻结 禁用用户
+  // 'deviceAll': 'device/deviceAll', //获取智能设备管理列表
+  'videoAll': 'Upgrade/getAll', //获取固件或者音频列表
+  'videoFrost': 'Upgrade/frost', //删除固件或者音频
+  'videoUpload': '/Upgrade/upload', //上传固件或者音频
+  'videoSearch': 'Upgrade/get_firmware', //查询固件或者音频
+  'detailDevice':'dinfo/info',//设备详情
+
+
 }
 
 export default apiUrl;

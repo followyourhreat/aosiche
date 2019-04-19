@@ -11,8 +11,8 @@ const Home = () =>
 // 设备管理
 const DeviceSummary = () =>
   import ('../pages/device/summary.vue');
-const DeviceImport = () =>
-  import ('../pages/device/import.vue');
+// const DeviceImport = () =>
+//   import ('../pages/device/import.vue');
 const DeviceManage = () =>
   import ('../pages/device/manage.vue');
 const DeviceUpdate = () =>
@@ -82,11 +82,11 @@ export default new Router({
           name: 'device-manage',
           component: DeviceManage
         },
-        {
-          path: 'import',
-          name: 'device-import',
-          component: DeviceImport
-        },
+        // {
+        //   path: 'import',
+        //   name: 'device-import',
+        //   component: DeviceImport
+        // },
         {
           path: 'update',
           name: 'device-update',

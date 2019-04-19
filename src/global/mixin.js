@@ -47,6 +47,7 @@ export const paginationChangeActive = {
   methods: {
     paginationChangeActive(val) {
       this.pageNumber = val;
+      // console.log(val);
       this.getMainList(this.getUrlData());
     }
   }

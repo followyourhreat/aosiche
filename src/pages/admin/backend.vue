@@ -20,7 +20,7 @@
         defaultValue
       ></dt-search-input>
       <div class="dt-search-cell">
-        <button type="button" class="dt-btn dt-btn-search" @click="topSearchActive">查 询</button>
+        <button type="button" class="dt-btn dt-btn-search" @click="handleSearch">查 询</button>
         <button type="button" class="dt-btn dt-btn-add" @click="topAddActive">新 增</button>
       </div>
     </div>
@@ -28,12 +28,18 @@
     <!-- 表格 start -->
     <div class="dt-table-outer">
       <div class="dt-table-true-wrap">
-        <el-table ref="multipleTable" :data="listArr" tooltip-effect="dark" style="width: 100%">
-          <!-- <el-table-column type="selection" width="55"></el-table-column> -->
+        <el-table
+          ref="multipleTable"
+          :data="listArr"
+          stripe
+          tooltip-effect="dark"
+          style="width: 100%"
+        >
+          <el-table-column type="selection" width="55"></el-table-column>
           <!-- <el-table-column  label="序号" width="120">
                 <template slot-scope="scope">{{ scope.row.date }}</template>
           </el-table-column>-->
-          <el-table-column prop="id" label="序号" width="60"></el-table-column>
+          <el-table-column prop="id" label="序号" width="60" type="index"></el-table-column>
           <el-table-column prop="account" label="账号" width></el-table-column>
           <el-table-column prop="username" label="姓名" width></el-table-column>
           <el-table-column prop="phone" label="手机号码" width></el-table-column>
@@ -89,14 +95,14 @@
                   <el-button type="primary" @click="handleReset(item.id)">确 定</el-button>
                 </span>
         </el-dialog>-->
-        <div class="no-data-tip" v-if="!listArr.length">暂无数据</div>
+        <!--<div class="no-data-tip" v-if="!listArr.length">暂无数据</div>-->
       </div>
 
       <div class="dt-page-wrap">
         <el-pagination
           class="dt-page-reset"
-          :page-size="10"
-          @current-change="paginationChangeActive"
+          :page-size="page"
+          @current-change="handlePage"
           :current-page="pageNumber"
           layout="total, prev, pager, next, jumper"
           :total="listTotal"
@@ -121,13 +127,13 @@
         class="demo-ruleForm"
       >
         <el-form-item label="账号" prop="account">
-          <el-input v-model="ruleForm2.account" autocomplete="off"></el-input>
+          <el-input v-model="ruleForm2.account"></el-input>
         </el-form-item>
         <el-form-item label="用户姓名" prop="username">
-          <el-input v-model="ruleForm2.username" autocomplete="off"></el-input>
+          <el-input v-model="ruleForm2.username"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password" v-if="itemId == 0">
-          <el-input v-model="ruleForm2.password" autocomplete="off"></el-input>
+          <el-input v-model="ruleForm2.password"></el-input>
         </el-form-item>
         <el-form-item label="手机号码" prop="phone">
           <el-input v-model.number="ruleForm2.phone"></el-input>
@@ -137,6 +143,7 @@
             @areaUpdate="topAreaChange"
             :defaultOptions="districts"
             :optionsTitle="optionsTitle"
+            class="backend-area"
           ></dt-search-area>
         </el-form-item>
         <el-form-item label="地址" prop="site">
@@ -147,7 +154,15 @@
           <el-radio v-model="ruleForm2.state" label="1">正常</el-radio>
           <el-radio v-model="ruleForm2.state" label="0">禁止</el-radio>
         </el-form-item>
-
+        <el-form-item label="账号权限" prop="checkList">
+          <el-checkbox-group v-model="checkList">
+            <el-checkbox label="设备"></el-checkbox>
+            <el-checkbox label="账号管理"></el-checkbox>
+            <el-checkbox label="到期提醒与推送"></el-checkbox>
+            <el-checkbox label="交易订单管理"></el-checkbox>
+            <el-checkbox label="系统日志"></el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm2')">保存</el-button>
           <!-- <el-button @click="resetForm('ruleForm2')">重置</el-button> -->
@@ -170,6 +185,7 @@ import {
   checkAllItemActive,
   checkItemActive
 } from "../../global/mixin";
+// import { validate } from "../../fetch/Validate";
 export default {
   mixins: [
     paginationChangeActive,
@@ -179,26 +195,40 @@ export default {
     checkItemActive
   ],
   data() {
-    var checkAge = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error("年龄不能为空"));
-      }
-      setTimeout(() => {
-        if (!Number.isInteger(value)) {
-          callback(new Error("请输入数字值"));
-        } else {
-          if (value < 18) {
-            callback(new Error("必须年满18岁"));
-          } else {
-            callback();
-          }
-        }
-      }, 1000);
-    };
-
+    // var checkAge = (rule, value, callback) => {
+    //   if (!value) {
+    //     return callback(new Error("年龄不能为空"));
+    //   }
+    //   setTimeout(() => {
+    //     if (!Number.isInteger(value)) {
+    //       callback(new Error("请输入数字值"));
+    //     } else {
+    //       if (value < 18) {
+    //         callback(new Error("必须年满18岁"));
+    //       } else {
+    //         callback();
+    //       }
+    //     }
+    //   }, 1000);
+    // };
+    // var CheckTel = (rule, value, callback) => {
+    //   if (!value) {
+    //     callback(new Error("请输入电话号码"));
+    //   } else if (!Number.isInteger(value)) {
+    //     callback(new Error("电话号码必须是数字"));
+    //   } else if (value.toString().length != 11) {
+    //     callback(new Error("电话号码必须是11位"));
+    //   } else {
+    //     callback();
+    //   }
+    // };
+    // var checkList = (rule, value, callback) => {
+    //   console.log(value);
+    // };
     return {
       SlidePageConfig,
       currentPage: 1,
+      page: 1,
       isEditSlideFlag: false,
       slideShow: false,
       pageNumber: 1,
@@ -224,15 +254,60 @@ export default {
         utime: "",
         site: "",
         province: "",
+        province_code: "",
         city: "",
+        city_code: "",
         district: "",
-        password: ""
+        district_code: "",
+        password: "",
+        power: []
       },
       options: regionDataPlus,
       selectedOptions: [],
-
+      checkList: [],
       rules2: {
-        // pass: [{ validator: validatePass, trigger: "blur" }],
+        // account: [
+        //   { required: true, message: "请输入账号", trigger: "blur" },
+        //   { min: 3, max: 10, message: "长度在 6 到 10 个字符", trigger: "blur" }
+        // ],
+        // username: [
+        //   { required: true, message: "请输入用户名", trigger: "blur" },
+        //   { min: 3, max: 10, message: "长度在 6 到 10 个字符", trigger: "blur" }
+        // ],
+        // password: [
+        //   { required: true, message: "请输入密码", trigger: "blur" },
+        //   { min: 6, max: 10, message: "长度在 6 到 10 个字符", trigger: "blur" }
+        // ],
+        // phone: [
+        //   {
+        //     type: "number",
+        //     required: true,
+        //     validator: CheckTel,
+        //     trigger: "blur"
+        //   }
+        // ],
+        // checkList: [
+        //   {
+        //     required: true,
+        //     message: "请至少选择一个权限",
+        //     validator: checkList,
+        //     trigger: "change"
+        //   }
+        // ],
+        // state: [
+        //   {
+        //     required: true,
+        //     message: "请至少选择一个角色状态",
+        //     trigger: "change"
+        //   }
+        // ],
+        // districts: [
+        //   {
+        //     required: true,
+        //     message: "请选省市区",
+        //     trigger: "blur"
+        //   }
+        // ]
       },
       optionsTitle: "",
       districts: ["110000", "110100", "110101"],
@@ -262,17 +337,24 @@ export default {
     topAreaChange(val) {
       this.districts = val.code;
       this.districtsText = val.text;
-      console.log(this.districtsText);
+      console.log(this.districts);
     },
     getMainList(params) {
       this.$http.getAll(params, res => {
-        this.listArr = res.data.data;
-        this.listTotal = res.data.data.length;
+        if (res.data && res.data.data) {
+          this.listArr = res.data.data;
+          this.listTotal = res.data.sum_data;
+          this.page = res.data.page;
+        } else {
+          this.listArr = [];
+          this.listTotal = 0;
+          this.page = 0;
+        }
       });
     },
 
     handleReset(index) {
-      console.log(index);
+      // console.log(index);
       this.$http.reset({ uid: index }, res => {
         this.$message({
           showClose: true,
@@ -286,16 +368,39 @@ export default {
       this.multipleSelection = val;
     },
     handleEdit(item) {
-      console.log(item);
+      // console.log(item);
       this.modal1 = true;
       this.itemId = 1;
-      this.districts = ["110000", "110100", "110101"];
-      console.log(this.districts);
+      this.checkList = [];
+
+      if (item.power) {
+        for (var i = 0; i <= item.power.length; i++) {
+          if (item.power[i] == "1") {
+            this.checkList.push("设备");
+          } else if (item.power[i] == "2") {
+            this.checkList.push("账号管理");
+          } else if (item.power[i] == "3") {
+            this.checkList.push("到期提醒与推送");
+          } else if (item.power[i] == "4") {
+            this.checkList.push("交易订单管理");
+          } else if (item.power[i] == "5") {
+            this.checkList.push("系统日志");
+          }
+        }
+      } else {
+        this.checkList = [];
+      }
+
+      this.districts = [];
+      this.districts[0] = item.province_code;
+      this.districts[1] = item.city_code;
+      this.districts[2] = item.district_code;
+
       this.ruleForm2 = Object.assign({}, item);
       // this.getMainList();
     },
     handleDelete(index, row) {
-      this.$http.frost({ uid: row.id, state: row.state }, res => {
+      this.$http.userfrost({ uid: row.id, state: row.state }, res => {
         this.$message({
           showClose: true,
           message: "操作成功",
@@ -304,7 +409,26 @@ export default {
         this.getMainList();
       });
     },
-
+    handleSearch() {
+      this.$http.getAll(
+        {
+          account: this.$refs.userNameSearchRef.value,
+          username: this.$refs.fullNameSearchRef.value
+        },
+        res => {
+          if (res.data && res.data.data) {
+            this.listArr = res.data.data;
+            this.listTotal = res.data.sum_data;
+            this.page = res.data.page;
+          } else {
+            this.pageNumber = 1;
+            this.listArr = [];
+            this.listTotal = 0;
+            this.page = 0;
+          }
+        }
+      );
+    },
     filterTag(value, row) {
       return row.state === value;
     },
@@ -312,26 +436,80 @@ export default {
     //编辑  新增---   保存
     submitForm(formName) {
       if (this.itemId == 0) {
-        console.log(this.districtsText);
-        this.ruleForm2.province = this.districtsText[0];
-        this.ruleForm2.city = this.districtsText[1];
-        this.ruleForm2.district = this.districtsText[2];
-        console.log(this.ruleForm2.province);
-        this.$http.add_user(this.ruleForm2, msg => {
-          this.$message({
-            showClose: true,
-            message: "新增用户成功",
-            type: "success"
-          });
-          this.getMainList();
+        if (this.districtsText[0] == "全国") {
+          this.ruleForm2.province = this.districtsText[0];
+          this.ruleForm2.city = "全部";
+          this.ruleForm2.district = "全部";
+          this.ruleForm2.province_code = this.districts[0];
+          this.ruleForm2.city_code = 0;
+          this.ruleForm2.district_code = 0;
+        } else if (this.districtsText[1] == "") {
+          this.ruleForm2.province = this.districtsText[0];
+          this.ruleForm2.city = "全部";
+          this.ruleForm2.district = "全部";
+          this.ruleForm2.province_code = this.districts[0];
+          this.ruleForm2.city_code = "all";
+          this.ruleForm2.district_code = "all";
+        } else if (this.districtsText[2] == "") {
+          this.ruleForm2.province = this.districtsText[0];
+          this.ruleForm2.city = this.districtsText[1];
+          this.ruleForm2.district = "全部";
+          this.ruleForm2.province_code = this.districts[0];
+          this.ruleForm2.city_code = this.districts[1];
+          this.ruleForm2.district_code = "all";
+        } else {
+          this.ruleForm2.province = this.districtsText[0];
+          this.ruleForm2.city = this.districtsText[1];
+          this.ruleForm2.district = this.districtsText[2];
+          this.ruleForm2.province_code = this.districts[0];
+          this.ruleForm2.city_code = this.districts[1];
+          this.ruleForm2.district_code = this.districts[2];
+        }
+        var roleList = [];
+        for (var i = 0; i <= this.checkList.length; i++) {
+          if (this.checkList[i] == "设备") {
+            roleList.push("1");
+          } else if (this.checkList[i] == "账号管理") {
+            roleList.push("2");
+          } else if (this.checkList[i] == "到期提醒与推送") {
+            roleList.push("3");
+          } else if (this.checkList[i] == "交易订单管理") {
+            roleList.push("4");
+          } else if (this.checkList[i] == "系统日志") {
+            roleList.push("5");
+          }
+        }
+        console.log(roleList);
+        this.ruleForm2.power = roleList;
+        console.log(this.ruleForm2.power);
+        this.$refs[formName].validate(valid => {
+          if (valid) {
+            this.$http.add_user(this.ruleForm2, msg => {
+              this.$message({
+                showClose: true,
+                message: "新增用户成功",
+                type: "success"
+              });
+              this.getMainList();
+              this.modal1 = false;
+            });
+          } else {
+            console.log("提交错误!!");
+            return false;
+          }
         });
       } else {
         this.$refs[formName].validate(valid => {
           if (valid) {
             this.$http.up_user(this.ruleForm2, res => {
+              this.$message({
+                showClose: true,
+                message: "编辑用户成功",
+                type: "success"
+              });
               this.getMainList();
+              this.modal1 = false;
             });
-            this.modal1 = false;
           } else {
             console.log("提交错误!!");
             return false;
@@ -344,7 +522,7 @@ export default {
     },
     getUrlData() {
       return {
-        page: this.pageNumber,
+        current_page: this.pageNumber,
         account: this.$refs.userNameSearchRef.value,
         username: this.$refs.fullNameSearchRef.value
       };
@@ -352,7 +530,6 @@ export default {
 
     //省市区
     addressChange(arr) {
-      console.log(arr);
       console.log(CodeToText[arr[0]], CodeToText[arr[1]], CodeToText[arr[2]]);
     },
     //新增用户
@@ -360,6 +537,7 @@ export default {
       // this.isEditSlideFlag = false;
       // this.slideShow = true;
       // this.setRefsEmpty();
+      this.checkList = [];
       this.districts = [];
       this.modal1 = true;
       this.itemId = 0;
@@ -373,9 +551,29 @@ export default {
         site: "",
         province: "",
         city: "",
-        district: ""
+        district: "",
+        province_code: "",
+        city_code: "",
+        district_code: ""
       };
     },
+    //分页跳转
+
+    handlePage(val) {
+      let params = {
+        current_page: val,
+        account: this.$refs.userNameSearchRef.value,
+        username: this.$refs.fullNameSearchRef.value
+      };
+      this.$http.getAll(params, res => {
+        if (res.data && res.data.data) {
+          this.listArr = res.data.data;
+        } else {
+          this.listArr = [];
+        }
+      });
+    },
+
     toEditAcount(info) {
       this.setRefsEmpty();
       let _info = info;
@@ -554,6 +752,9 @@ export default {
   top: 15px;
   left: 50%;
   transform: translateX(-50%);
+}
+.dt-search-title {
+  display: none !important;
 }
 </style>
 

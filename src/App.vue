@@ -28,4 +28,11 @@ export default {
   height: 100%;
   background: $color-bg-main;
 }
+.backend-area .dt-search-title {
+  display: none;
+}
+.el-pagination .el-pager li.active{
+  color:#fff !important;
+  background: #409EFF;
+}
 </style>

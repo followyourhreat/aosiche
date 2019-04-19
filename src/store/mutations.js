@@ -4,8 +4,7 @@ export const state = {
   accountInfo: {},
   testStroea: '',
   disC: '',
-  userInfo: localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo")) : { real_name: '管理员' },
-  menuInfo: localStorage.getItem("menuInfo") ? JSON.parse(localStorage.getItem("menuInfo")) : []
+
 }
 
 export const mutations = {
@@ -25,12 +24,7 @@ export const mutations = {
     console.log(info);
     state.disC = info;
   },
-  setUserInfoMutation(state, data) {
-    state.userInfo = Object.assign({}, state.userInfo, data);
-  },
-  setMenuInfoMutation(state, data) {
-    state.menuInfo = Object.assign({}, state.menuInfo, data);
-  }
+
 }
 
 export const actions = {
@@ -40,14 +34,6 @@ export const actions = {
   storeTest(context, data) {
     console.log(context, data);
     context.commit('sTest', data)
-  },
-  setUserInfoAction({ commit }, data) {
-    localStorage.setItem('userInfo', JSON.stringify(data));
-    commit('setUserInfoMutation', data);
-  },
-  setMenuInfoAction({ commit }, data) {
-    localStorage.setItem('menuInfo', JSON.stringify(data));
-    commit('setMenuInfoMutation', data);
   }
 }
 
@@ -58,6 +44,4 @@ export const getters = {
   testStroea: () => state.testStroea,
   dCommtValue: () => state.disC,
   // isActive:()=> state.isActive
-  userInfo: state => state.userInfo,
-  menuInfo: state => state.menuInfo,
 }

@@ -1,37 +1,18 @@
+<script src="../../../../apiUrl(1).js"></script>
 <template>
   <div calss="serve-waiting-outer">
     <div class="dt-search-top">
-      <!-- 服务单号 -->
-      <dt-search-input
-        ref="serviceIdSearchRef"
-        :inputWidth="$SearchInputConfig.serviceNumber.width"
-        :title="$SearchInputConfig.serviceNumber.title"
-        :placeholder="$SearchInputConfig.serviceNumber.placeholder"
-        :maxLength="$SearchInputConfig.serviceNumber.length"
-        defaultValue
-      ></dt-search-input>
 
-      <!-- 服务分类 -->
-      <dt-select-option
-        ref="sericeCategorySearchRef"
-        :optiosTitle="$ElSelectName.serviceCategory.title"
-        :optionsName="$ElSelectName.serviceCategory.name"
-        :conWidth="$ElSelectName.serviceCategory.width"
-      ></dt-select-option>
+      <!--代理商-->
+      <dt-search-input  ref="agent" :inputWidth='$SearchInputConfig.agent.width' :title="$SearchInputConfig.agent.title" :placeholder ='$SearchInputConfig.agent.placeholder' :maxLength = '$SearchInputConfig.agent.length' defaultValue = ''></dt-search-input>
+  <!--//服务单号-->
+      <dt-search-input  ref="handleTypeRef" :inputWidth='$SearchInputConfig.serviceNumber.width' :title="$SearchInputConfig.serviceNumber.title" :placeholder ='$SearchInputConfig.serviceNumber.placeholder' :maxLength = '$SearchInputConfig.serviceNumber.length' defaultValue = ''></dt-search-input>
 
-      <!-- 问题分类 -->
-      <dt-select-option
-        ref="questionCategorySearchRef"
-        :optiosTitle="$ElSelectName.questionCategory.title"
-        :optionsName="$ElSelectName.questionCategory.name"
-        :conWidth="$ElSelectName.questionCategory.width"
-      ></dt-select-option>
+      <!-- <dt-date-range title='操作时间' @startDateChange='startDateSearchChange' @endDateChange='endDateSearchChange'></dt-date-range> -->
 
-      <!-- 地区 -->
-      <dt-search-area @areaUpdate="topAreaChange"></dt-search-area>
 
       <div class="dt-search-cell">
-        <button type="button" class="dt-btn dt-btn-search" @click="topSearchActive">查 询</button>
+        <button type="button" class="dt-btn dt-btn-search" @click="find">查 询</button>
       </div>
     </div>
 
@@ -39,366 +20,408 @@
     <div class="dt-table-outer">
       <div class="dt-table-true-wrap">
         <table class="dt-table-same" cellspacing="0" cellpadding="0">
-          <thead>
-            <tr class>
-              <th class="tw-service-number">序号</th>
-              <th class="tw-service-number">服务单号</th>
-              <th class="tw-service-type">服务类型</th>
-              <th class="tw-question-category">充值金额</th>
-              <th class="tw-time-ss">请求时间</th>
-              <th class="tw-device-brand">代理商</th>
-              <th class="tw-device-model">设备MAC</th>
-              <th class="tw-device-series">设备系列</th>
-              <th class="tw-province">所在省份</th>
-              <th class="tw-city">所在城市</th>
-              <th class="tw-district">所在地区</th>
-              <th class="tw-handle-edit">操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(item,index) in listArr" :key="index">
-              <td
-                class="dt-table-check"
-                :class="{'dt-table-checked': item.checked}"
-                @click="checkItemActive(item)"
-              ></td>
-              <td>{{item.service_id}}</td>
-              <td>{{item.service_type|FilterServiceType}}</td>
-              <td>{{item.query_type|FilterQuestionCategory}}</td>
-              <td>{{item.ctime*1000|DateFormat('yyyy-MM-dd hh:mm:ss')}}</td>
-              <td>{{item.brand||'--'}}</td>
-              <td>{{item.series||'--'}}</td>
-              <td>{{item.model||'--'}}</td>
-              <td>{{item.province}}</td>
-              <td>{{item.city}}</td>
-              <td>{{item.district}}</td>
-              <!-- <td class="dt-table-edit">
-                  <b @click="tableEditActive(item)">派单</b>
-              </td>-->
-            </tr>
-          </tbody>
+            <thead>
+              <tr class="">
+                <th class="tw-service-number">序号</th>
+                <th class="tw-service-number">服务单号</th>
+                <!--<th class="tw-service-type">服务类型</th>-->
+                <th class="tw-question-category">充值金额</th>
+                <th class="tw-question-category">数量</th>
+                <th class="tw-question-category">单价</th>
+                <th class="tw-time-ss">请求时间</th>
+                <th class="tw-device-brand">代理商</th>
+                <!--<th class="tw-device-model">设备MAC</th>-->
+                <!--<th class="tw-device-series">设备系列</th>-->
+                <!--<th class="tw-province">所在省份</th>-->
+                <!--<th class="tw-city">所在城市</th>-->
+                <!--<th class="tw-district">所在地区</th>-->
+                 <th class="tw-handle-edit">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(item,index) in listArr" :key="index">
+                <!--<td class="dt-table-check" :class="{'dt-table-checked': item.checked}" @click="checkItemActive(item)"></td>-->
+                <td>{{index+1}}</td>
+                <td>{{item.order_id}}</td>
+                <!--<td>{{item.service_type|FilterServiceType}}</td>-->
+                <td>{{item.money}}</td>
+                <td>{{item.buy}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.ctime*1000|DateFormat('yyyy-MM-dd hh:mm:ss')}}</td>
+                <td>{{item.agent||'--'}}</td>
+                <!--<td>{{item.series||'&#45;&#45;'}}</td>-->
+                <!--<td>{{item.model||'&#45;&#45;'}}</td>-->
+                <!--<td>{{item.province}}</td>-->
+                <!--<td>{{item.city}}</td>-->
+                <!--<td>{{item.district}}</td>-->
+               <td class="dt-table-edit">
+                  <b @click="tableEditActive(item)" v-if="showshenhe">审核</b>
+                  <b v-else>不可支付</b>
+                </td>
+              </tr>
+            </tbody>
         </table>
         <div class="no-data-tip" v-if="!listArr.length">暂无数据</div>
       </div>
-      <div class="dt-page-wrap">
-        <el-pagination
-          class="dt-page-reset"
-          :page-size="10"
-          @current-change="paginationChangeActive"
-          :current-page.sync="pageNumber"
-          layout="total, prev, pager, next, jumper"
-          :total="listTotal"
-        ></el-pagination>
+      <div class="dt-page-wrap" v-if="showfenye">
+        <el-pagination class="dt-page-reset" :page-size="12"  @current-change="jumps" :current-page.sync="pageNumber" layout="total, prev, pager, next, jumper" :total="listTotal">
+        </el-pagination>
       </div>
     </div>
     <!-- 表格 end -->
 
-    <!-- 侧滑start -->
-    <dt-slide-page
-      slideTitle="派单处理"
-      :class="{'slide-page-show': slideShow}"
-      @hideSlidePage="slideShow = false"
-      :slideWidth="SlidePageConfig.slideWidthA"
-    >
-      <ul class="order-ul">
-        <!-- 模板名称 -->
-        <li class="order-li-info order-li-title">
-          <label>申请时间</label>
-          <label>服务类型</label>
-          <label>问题类型</label>
-        </li>
-        <li class="order-li-info">
-          <label>{{serviceDetailInfo.utime*1000|DateFormat('yyyy-MM-dd hh:mm:ss')}}</label>
-          <label>{{serviceDetailInfo.service_type|FilterServiceType}}</label>
-          <label>{{serviceDetailInfo.query_type|FilterQuestionCategory}}</label>
-        </li>
 
-        <li class="order-li-info order-li-title">
-          <label>客户姓名</label>
-          <label>联系电话</label>
-          <label>客户地址</label>
-        </li>
-        <li class="order-li-info">
-          <label>{{serviceDetailInfo.nickname}}</label>
-          <label>{{serviceDetailInfo.mobile}}</label>
-          <label
-            :title="serviceDetailInfo.province + serviceDetailInfo.city + serviceDetailInfo.district"
-          >{{serviceDetailInfo.province + serviceDetailInfo.city + serviceDetailInfo.district}}</label>
-        </li>
-
-        <li class="order-show-li">
-          <div class="order-show-wrap">
-            <h6>其他要求</h6>
-            <div class="od-con od-con-img">
-              <section>{{serviceDetailInfo.description}}</section>
-              <div class="img">
-                <label v-if="serviceDetailInfo.images" v-for="imgSrc in serviceDetailInfo.images">
-                  <img
-                    @mouseenter="imgMouseIn(imgSrc)"
-                    @mouseleave="imgShowBig = false"
-                    :src="imgSrc"
-                    alt
-                  >
-                </label>
-                <transition name="fade" mode="out-in">
-                  <label v-if="imgShowBig" :class="{'img-bigger': 1 === 1}">
-                    <img :src="imgSrcBig" alt>
-                  </label>
-                </transition>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <!-- 派单处理(派单) -->
-        <li>
-          <dt-select-option-dynamic
-            ref="servicerSlideRef"
-            :conWidth="SlidePageConfig.inputWidthA"
-            :optiosTitle="$ElSelectName.dispatchOrder.title"
-            :optionsData="dispactchDataDatault"
-          ></dt-select-option-dynamic>
-        </li>
-      </ul>
-
-      <div class="slide-btn-wrap">
-        <button class="dt-btn" @click="slideSureActive">确定</button>
-        <button class="dt-btn dt-btn-cancel" @click="slideShow = false">取消</button>
-      </div>
-    </dt-slide-page>
-    <!-- 侧滑 end -->
+    <el-dialog
+      title="提示"
+      :visible.sync="centerDialogVisible"
+      width="30%"
+      center>
+      <span>是否通过？</span>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="pass(4)">不通过</el-button>
+    <el-button type="primary" @click="pass(1)">通 过</el-button>
+  </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import {
-  dtSearchTextarea,
-  dtSlidePage,
-  dtSelectOptionDynamic
-} from "../../global/searchComponents";
+  import { dtDateRange } from '../../global/searchComponents';
+
+import { dtSearchTextarea, dtSlidePage, dtSelectOptionDynamic } from '../../global/searchComponents';
 import { SlidePageConfig } from "../../global/constant.js";
-import {
-  topSearchActive,
-  paginationChangeActive,
-  topAreaChange,
-  checkAllItemActive,
-  checkItemActive
-} from "../../global/mixin.js";
+import { topSearchActive, paginationChangeActive, topAreaChange, checkAllItemActive, checkItemActive ,dateSearchChange} from "../../global/mixin.js";
+//import { topSearchActive, paginationChangeActive, dateSearchChange } from '../../global/mixin.js';
 export default {
-  mixins: [
-    topSearchActive,
-    paginationChangeActive,
-    topAreaChange,
-    checkAllItemActive,
-    checkItemActive
-  ],
+  mixins: [topSearchActive, paginationChangeActive, topAreaChange, checkAllItemActive, checkItemActive,dateSearchChange],
   data: () => ({
     SlidePageConfig,
     allItemChecked: false,
-    serverIds: "",
+    serverIds: '',
     pageNumber: 1,
     prePage: 1,
     isEditSlideFlag: false,
     slideShow: false,
     imgShowBig: false,
-    listArr: [],
-    listTotal: 0,
+
+
     slideSubmitId: 0,
-    searchAreaData: ["0", "0", "0"],
+
     dispactchDataDatault: [],
     serviceHandleStatusFlag: 0,
     dispatchListArr: [],
     checkListArr: [],
     recoredListArr: [],
-    serviceDetailInfo: {}
+    serviceDetailInfo: {},
+
+
+//    bb:["110000","110100","110102"],
+    centerDialogVisible:false,
+
+
+    listArr: [],
+    listTotal: 0,
+    searchAreaData: ['0', '0', '0'],
+    params:{
+      id:this.id,
+      account:this.account,
+      state:0,
+      agent:"",
+      start:"",
+      end:"",
+      current_page:1,
+
+//      province:"",
+//      city:"",
+//      district:""
+
+
+    },
+    currentPage:1,
+    showshenhe:false,
+    //审核传输数据
+    obj:{
+      id:"",
+      state:"",
+
+    },
+    searchDate: {
+      start: '',
+      end: ''
+    },
+    power:[],
+    showfenye:true
   }),
   mounted() {
-    // 获取服务人员列表
-    // this.$http.FaultRepairGetServers({}, msg => {
-    //   this.dispactchDataDatault = msg.data.map(val => ({value: val.server_id, label: val.name + '/' + val.province + val.city + val.district}));
-    // });
-    // this.getMainList(this.getUrlData())
+    this.params.id=localStorage.getItem('aoid')
+    this.power=localStorage.getItem('power')
+    if(this.params.id==1||this.power.indexOf(5)!=-1){
+      this.showshenhe=true
+    }
+    this.params.account=localStorage.getItem('accountnum')
+    this.getorderall(this.params)
   },
   methods: {
     // 组件内的功能函数
-    getUrlData() {
-      // 获取列表方法
-      return {
-        complete: 1,
-        page: this.pageNumber,
-        service_id: this.$refs.serviceIdSearchRef.value,
-        service_type: this.$refs.sericeCategorySearchRef.value,
-        query_type: this.$refs.questionCategorySearchRef.value,
-        province_code: this.searchAreaData[0],
-        city_code: this.searchAreaData[1],
-        district_code: this.searchAreaData[2]
-      };
+    //获取搜索待审核订单
+    getorderall(params) {
+      this.$http.Orderall(params, msg => {
+         this.listArr = msg.data.data;
+        this.listTotal=msg.data.sum_data
+
+      });
     },
-    getMainList(params) {
-      this.$http.FaultRepairGetServiceList(params, msg => {
-        let _msg = msg.data;
-        this.listArr = this.$projectUtils.ListAddChecked(_msg.list);
-        this.listTotal = Number(_msg.total);
+
+    //跳转
+    jumps(val){
+
+//      this.currentPage=val
+      const that=this
+      this.params.current_page=val;
+      console.log(this.currentPage)
+      var start =new Date(this.searchDate.start.replace(/\-/g,"/"))
+      this.params.start = start.getTime()/1000;
+      var end =new Date(this.searchDate.end.replace(/\-/g,"/"))
+      this.params.end = end.getTime()/1000;
+      if(isNaN( this.params.start)){
+        this.params.start=""
+      }
+      if(isNaN(this.params.end)){
+        this.params.end=""
+      }
+      this.params.order_id=this.$refs.handleTypeRef.value,
+      this.params.agent=this.$refs.agent.value
+      this.$http.Orderall(this.params,msg => {
+        if(msg.errcode==400010){
+          this.listArr=""
+        }else if(msg.errmsg=="数据为空"){
+          this.listArr=[]
+          this.listTotal=0
+
+        }else{
+          this.listArr=msg.data.data
+          this.listTotal=msg.data.sum_data
+        }
+
+        return false
+      });
+
+    },
+//    //查询
+//    find(){
+//
+//      var start =new Date(this.searchDate.start.replace(/\-/g,"/"))
+//      this.params.start = start.getTime()/1000;
+//      var end =new Date(this.searchDate.end.replace(/\-/g,"/"))
+//      this.params.end = end.getTime()/1000;
+//      if(isNaN( this.params.start)){
+//        this.params.start=""
+//      }
+//      if(isNaN(this.params.end)){
+//        this.params.end=""
+//      }
+//
+//
+//
+//
+//
+//      this.params.agent=this.$refs.agent.value
+//      if(this.params.currentPage!=1){
+//        this.params.currentPage=1
+//      }else{
+//        this.$http.Orderall(this.params,msg => {
+//
+//          this.listArr=msg.data.data
+//          this.listTotal=msg.data.sum_data
+//
+//          return false
+//
+//        });
+//      }
+//
+//    },
+
+    //查询
+    find(){
+      const that =this
+      if(this.params.current_page==1){
+        const search={
+          id:localStorage.getItem('aoid'),
+          state:0,
+          account:this.params.account,
+          agent:this.$refs.agent.value,
+          order_id:this.$refs.handleTypeRef.value,
+        }
+
+//        var start =new Date(this.searchDate.start.replace(/\-/g,"/"))
+//
+//        search.start = start.getTime()/1000;
+//        var end =new Date(this.searchDate.end.replace(/\-/g,"/"))
+//        search.end = end.getTime()/1000;
+//        if(isNaN(  search.start)){
+//          search.start=""
+//        }
+//        if(isNaN( search.end)){
+//          search.end=""
+//        }
+//
+//
+//        if(search.start==""&&search.end!=""){
+//          this.$message({
+//            message: "请选择开始时间",
+//            type: 'warning'
+//          });
+//          return false
+//        }
+//        if(search.end==""&&search.start!=""){
+//          this.$message({
+//            message: "请选择结束时间",
+//            type: 'warning'
+//          });
+//          return false
+//        }
+//
+//        console.log(search)
+        this.$http.Orderall(search,msg => {
+          if(msg.errcode==400010){
+            this.listArr=""
+          }else if(msg.errmsg=="数据为空"){
+            this.listArr=[]
+            this.listTotal=0
+
+          }else{
+            this.listArr=msg.data.data
+            this.listTotal=msg.data.sum_data
+          }
+
+
+
+          // that.showfenye=false
+          return false
+
+
+        });
+      }else{
+        this.pageNumber=1
+
+
+      }
+
+
+//      this.params.agent=this.$refs.agent.value
+//      if(this.params.currentPage!=1){
+//        this.params.currentPage=1
+//      }else{
+//        this.$http.getorder(search,msg => {
+//
+//
+//          this.listArr=msg.data.data
+////          this.listTotal=msg.data.sum_data
+//
+//          return false
+//
+//        });
+//      }
+
+    },
+
+    //审核是否通过
+    pass(val){
+      this.obj.state=val
+
+      this.$http.audit(this.obj,msg => {
+      this.centerDialogVisible=false
+        this.jumps(this.params.current_page)
+
+        return false
+
       });
     },
     tableEditActive(item) {
-      // 获取订单详情
-      this.$http.FaultRepairGetDetails({ service_id: item.service_id }, msg => {
-        this.serviceDetailInfo = Object.assign({}, msg.data, { id: item.id });
-      });
-      this.slideShow = true;
+      this.obj.id=item.id
+      this.centerDialogVisible=true
     },
+
     slideSureActive() {
-      var _urlData = {
-        id: this.serviceDetailInfo.id,
-        server_ids: this.$refs.servicerSlideRef.value
-      };
-      this.$http.FaultRepairServiceSendOut(_urlData, msg => {
-        this.slideShow = false;
-        this.getMainList(this.getUrlData());
-      });
+
     },
-    slideSureActive2() {
-      if (this.serverIds === "") {
-        this.$message.warning("请选择服务人员");
-        return;
-      }
-      let _idArr = this.$projectUtils.GetCheckedItemIds(this.listArr, "id");
-      if (_idArr.length) {
-        var _urlData = {
-          ids: _idArr.join(),
-          server_ids: this.serverIds
-        };
-        this.$http.FaultRepairServiceSendOut(_urlData, msg => {
-          this.slideShow = false;
-          this.getMainList(this.getUrlData());
-        });
-      } else {
-        this.$message.warning("请选择服务单号");
-      }
-    },
-    editSlide(msg) {
-      let _msg = msg;
-      // input 赋值
-      this.$refs.operationSlideRef.value = "1";
-      this.$refs.remarkSlideRef.value = "";
-      // this.$refs.servicerSlideRef.value = _msg.mobile;
-      this.$refs.emergencySlideRef.value = _msg.emergency;
-    },
-    getServiceDetails(id) {
-      // 获取服务详情
-      this.$http.FaultRepairGetDetails(id, msg => {
-        let _msg = msg.data;
-        this.serviceDetailInfo = _msg;
-        this.editSlide(_msg);
-      });
-    },
-    getDispatchList(id) {
-      // 获取派单记录
-      this.$http.FaultRepairGetDispatchList(id, msg => {
-        let _msg = msg.data;
-        this.recoredListArr = _msg.list;
-      });
-    },
-    getCheckList(id) {
-      // 获取审核记录
-      this.$http.FaultRepairGetCheckList(id, msg => {
-        let _msg = msg.data;
-        this.recoredListArr = _msg.list;
-      });
-    },
-    getServersList(serviceId, districtCode) {
-      // Fault_repair - 获取服务详情
-      this.$http.FaultRepairGetServers(serviceId, districtCode, msg => {
-        let _msg = msg;
-        let _arr = [];
-        _msg.data.forEach(val => {
-          _arr.push({
-            value: val.id,
-            label: val.fullname
-          });
-        });
-        this.dispactchDataDatault = _arr;
-      });
-    },
-    imgMouseIn(imgSrc) {
-      this.imgShowBig = true;
-      this.imgSrcBig = imgSrc;
-    }
+
   },
   components: {
     dtSlidePage,
     dtSearchTextarea,
-    dtSelectOptionDynamic
+    dtSelectOptionDynamic,
+    dtDateRange,
+
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../../scss/constant.style.scss";
-.order-ul {
+@import '../../scss/constant.style.scss';
+.order-ul{
   width: 500px;
-  .order-li-info {
+  .order-li-info{
     display: flex;
     line-height: 20px;
     font-size: $size-three;
-    &.order-li-title {
-      margin-bottom: 0px;
-      label {
-        color: #b3b3b3;
+    &.order-li-title{
+      margin-bottom:0px;
+      label{
+        color: #B3B3B3;
         font-size: $size-two;
       }
     }
-    label:nth-of-type(1) {
+    label:nth-of-type(1){
       width: 180px;
     }
 
-    label:nth-of-type(2) {
+    label:nth-of-type(2){
       width: 126px;
     }
 
-    label:nth-of-type(3) {
+    label:nth-of-type(3){
       flex: 1;
     }
   }
 }
-.order-show-li {
-  .order-show-wrap {
+.order-show-li{
+  .order-show-wrap{
     height: 170px;
-    border: 1px solid #dddddd;
-    h6 {
+    border: 1px solid #DDDDDD;
+    h6{
       padding-left: 16px;
       height: 40px;
       line-height: 40px;
     }
-    .od-con {
+    .od-con{
       padding: 8px 16px;
-      border-top: 1px solid #dddddd;
+      border-top: 1px solid #DDDDDD;
       height: 130px;
       line-height: 20px;
       overflow-y: auto;
-      &.od-con-img {
+      &.od-con-img{
         // display: flex;
         // position: relative;
         // section{
         //   flex: 1;
         // }
-        .img {
+        .img{
           display: flex;
           position: relative;
         }
-        label {
+        label{
           width: 140px;
           line-height: 112px;
           text-align: center;
-          img {
+          img{
             width: 60%;
             max-height: 100%;
             vertical-align: middle;
             cursor: pointer;
           }
         }
-        .img-bigger {
+        .img-bigger{
           position: fixed;
           left: 50%;
           top: 50%;
@@ -409,26 +432,26 @@ export default {
         }
       }
     }
-    .od-con-record p {
+    .od-con-record p{
       height: 50px;
       line-height: 50px;
       display: flex;
-      span:nth-of-type(1) {
+      span:nth-of-type(1){
         flex: 1;
-        b {
+        b{
           display: block;
           line-height: 20px;
           height: 20px;
         }
-        b:nth-of-type(1) {
+        b:nth-of-type(1){
           margin-top: 5px;
         }
-        b:nth-of-type(2) {
+        b:nth-of-type(2){
           font-size: $size-one;
           color: #999;
         }
       }
-      span:nth-of-type(2) {
+      span:nth-of-type(2){
         width: 80px;
         text-align: center;
       }

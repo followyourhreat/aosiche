@@ -3,12 +3,12 @@
   <div class="dt-search-cell">
     <i class="dt-search-title">{{titleCon}}：</i>
     <span class="dt-search-con" style="width:160px">
-      <el-date-picker :editable=false @change="change1" v-model="value1" type="date" placeholder="请选择" :picker-options="pickerOptions0">
+      <el-date-picker :editable=false @change="change1" v-model="value1" id="startTime" type="date" placeholder="请选择" :picker-options="pickerOptions0">
       </el-date-picker>
     </span>
     <b>至</b>
     <span class="dt-search-con" style="width:160px">
-      <el-date-picker :editable=false @change="change2" v-model="value2" type="date" placeholder="请选择" :picker-options="pickerOptions1">
+      <el-date-picker :editable=false @change="change2" v-model="value2" id="endTime" type="date" placeholder="请选择" :picker-options="pickerOptions1">
       </el-date-picker>
     </span>
   </div>

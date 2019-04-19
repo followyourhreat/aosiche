@@ -47,7 +47,9 @@ export default {
       } else {
         return this.$route.path.indexOf(this.path) !== -1;
       }
+
     },
+
     activeStyle() {
       return this.isActive
         ? { color: this.activeClass, backgroundColor: this.backgroundClass }
@@ -58,6 +60,9 @@ export default {
     btnClick() {
       this.$router.replace(this.path);
     }
+  },
+  mounted:function () {
+//    console.log(this.$route.path)
   }
 };
 </script>
@@ -72,6 +77,7 @@ export default {
   align-items: center;
   justify-content: center;
   color: #fff;
+  cursor: pointer;
 }
 .side-item img {
   padding: 3px 3px;
@@ -79,4 +85,8 @@ export default {
   height: 36px;
   vertical-align: middle;
 }
+
 </style>
+
+
+

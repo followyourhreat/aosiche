@@ -2,23 +2,9 @@
  * 下来框所有数据集合，与ElSelectName结合使用
  */
 export const ElSelectOption = {
-  feedbackType: [ // ok 反馈类型(1净水器问题，2网络问题，3使用问题，4其他问题)
-    { value: '', label: '全部' },
-    { value: '1', label: '净水器问题' },
-    { value: '2', label: '网络问题' },
-    { value: '3', label: '使用问题' },
-    { value: '4', label: '其他问题' }
-  ],
-  // deviceStatusType: [
-  //   { value: '', label: '全部' },
-  //   { value: '0', label: '正常' },
-  //   { value: '1', label: '非正常' }
-  // ],
-  deviceStatusType: [ // 设备状态: 0 正常 1 锁定 2 停机 3待激活
-    { value: '', label: '全部' },
+  deviceStatusType: [ // 设备状态: 0 报废 1 正常
     { value: '1', label: '正常' },
-    { value: '2', label: '锁定' },
-    { value: '3', label: '停机' }
+    { value: '0', label: '报废' },
   ],
   deviceTestStatus: [ // 设备检测状态: 0 未测试 1 通过 2 不通过 3 不通过
     { value: '3', label: '全部' },
@@ -33,11 +19,16 @@ export const ElSelectOption = {
     { value: '选项4', label: '安装请求' },
     { value: '选项5', label: '售后请求' }
   ],
-  networkType: [ // 网络状态(0离线、1在线、2故障)
-    { value: '', label: '全部' },
+  networkType: [ // 网络状态(0离线、1在线)
+    { value: '3', label: '全部' },
     { value: '0', label: '离线' },
     { value: '1', label: '在线' }
   ],
+  // networkType: [ // 网络状态(0离线、1在线、2故障)
+  //   { value: '', label: '全部' },
+  //   { value: '0', label: '离线' },
+  //   { value: '1', label: '在线' }
+  // ],
   // upgradeNetwork: [ // 网络状态(0离线、1在线)
   //   { value: '', label: '全部' },
   //   { value: '0', label: '离线' },
@@ -338,9 +329,9 @@ export const ElSelectOption = {
     { value: '3', label: '用户分润' }
   ],
   filterStatus2: [ // 设备状态(1全部2正常3需更换) zengbin add
-    { value: '1', label: '全部' },
-    { value: '2', label: '在线' },
-    { value: '3', label: '离线' }
+    { value: '2', label: '全部' },
+    { value: '1', label: '正常' },
+    { value: '0', label: '删除' }
   ],
 };
 

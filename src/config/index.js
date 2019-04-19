@@ -9,7 +9,8 @@ switch (env) {
      baseUrl = "http://testfiles.ourslinks.com/aosiche"
     break;
   case 'production':
-    baseUrl = apiUrl.httpUrl;
+    // baseUrl = apiUrl.httpUrl;
+     baseUrl = "http://testfiles.ourslinks.com/aosiche"
     break;
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div id="login">
     <div class="login-con">
-      <div class="logo-fotert">登录/login</div>
+      <div class="logo-fotert">澳思澈后台管理系统</div>
       <div class="login-con-inner">
         <!-- <p>账号：</p> -->
         <div class="log-account">
@@ -46,6 +46,7 @@ export default {
         localStorage.setItem("aotoken", msg.data);
       }
     });
+    localStorage.setItem("power", []);
   },
 
   methods: {
@@ -69,8 +70,12 @@ export default {
         localStorage.setItem("power", msg.data.power);
         localStorage.setItem("accountnum", this.username);
         localStorage.setItem("aousername", msg.data.username);
+        localStorage.setItem("violence", msg.data.violence);
+
         if (msg.errcode == 0) {
           this.$router.push({ name: "device-summary" });
+        } else {
+          this.$message.warning(msg.errmsg);
         }
       });
     }

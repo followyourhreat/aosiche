@@ -22,7 +22,7 @@ export const lineChart = (param) => {
       // defaultSeriesType: 'area',
       zoomType: 'x',
       spacingLeft: 5,
-      spacingBottom: 0,
+      spacingBottom: 10,
       spacingRight: 5,
       spacingTop: 20
     },
@@ -40,7 +40,7 @@ export const lineChart = (param) => {
       enabled: false
     },
     plotOptions: {
-      line: {
+      spline: {
         dataLabels: {
           enabled: false // 显示每条曲线每个节点的数据项的值
         },
@@ -56,6 +56,7 @@ export const lineChart = (param) => {
       //   }
       // }
     },
+
     xAxis: {
       categories: param.xAxis,
       labels: {
@@ -63,6 +64,8 @@ export const lineChart = (param) => {
           color: '#B3B3B3;' // 坐标轴字体颜色
         }
       },
+      gridLineWidth: 1,
+      gridLineColor: "#F0F0F0",
       lineColor: '#F0F0F0', // X轴颜色
       lineWidth: 1, // X轴宽度
       tickLength: 0, // X 坐标长短，为负在上面
@@ -102,12 +105,15 @@ export const lineChart = (param) => {
       data: param.data,
       marker: {
         fillColor: '#fff',
-        lineWidth: 2,
-        lineColor: "#EB9054", // 颜色为空 默认圆圈是colors颜色
-        enabled: false,
-        // symbol: 'diamond'
+        lineWidth: 1,
+        lineColor: '#EB9054', // 颜色为空 默认圆圈是colors颜色
+        enabled: true,
+        symbol: 'round'
       },
-      lineWidth: 4 // 线条宽度
+      // data:[7, 6, 9, 14, 18, 21, 25, {
+      //   y: 26.5,
+      // }, 23, 18, 13, 9],
+      lineWidth: 4// 线条宽度
     }]
   });
 };

@@ -66,7 +66,9 @@ const SearchInputConfig = {
   ruleChargeOnly: { title: '', placeholder: '输入金额', width: 40, length: MaxLengthConfig.ruleChargeOnly }, // 多少元
   ruleNumberOnly: { title: '', placeholder: '输入数字', width: 40, length: MaxLengthConfig.ruleNumberOnly }, // 多少
   ruleUnitOnly: { title: '', placeholder: '输入容量', width: 40, length: MaxLengthConfig.ruleUnitOnly }, // 多少升
-  linkAddress: { title: '链接地址', placeholder: '请输入链接地址', width: 140, length: MaxLengthConfig.linkAddress } // 链接地址
+  linkAddress: { title: '链接地址', placeholder: '请输入链接地址', width: 140, length: MaxLengthConfig.linkAddress }, // 链接地址
+  agent: { title: '代理商', placeholder: '请输入代理商', width: 140, length: MaxLengthConfig.linkAddress }, // 链接地址
+
 };
 
 export default {

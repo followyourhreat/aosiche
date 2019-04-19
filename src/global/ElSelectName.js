@@ -78,6 +78,7 @@ const ElSelectName = {
   financeType: { name: 'financeType', title: '收支类型', width: 100 }, // 财务管理【收支类型】
   financeState: { name: 'financeState', title: '交易状态', width: 100 }, // 财务管理【交易状态】
   financeOrder: { name: 'financeOrder', title: '订单类型', width: 100 }, // 财务管理【订单类型】
+
   filterStatus2: { name: 'filterStatus2', title: '设备状态', width: 100 }, // 滤芯状态 zengbin add
 }
 

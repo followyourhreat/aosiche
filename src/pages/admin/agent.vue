@@ -20,7 +20,7 @@
       <div class="dt-search-cell">
         <button type="button" class="dt-btn dt-btn-search" @click="topSearchActive">查 询</button>
         <button type="button" class="dt-btn dt-btn-add" @click="topAddActive">新 增</button>
-        <button type="button" class="dt-btn dt-btn-export" @click="topExportActive">导 出</button>
+        <!-- <button type="button" class="dt-btn dt-btn-export" @click="topExportActive">导 出</button> -->
       </div>
     </div>
     <!-- <div class="dt-search-top">
@@ -40,7 +40,7 @@
           <!-- <el-table-column  label="序号" width="120">
                 <template slot-scope="scope">{{ scope.row.date }}</template>
           </el-table-column>-->
-          <el-table-column prop="id" label="序号" width="60"></el-table-column>
+          <el-table-column prop="id" label="序号" width></el-table-column>
           <el-table-column prop="account" label="账号" width></el-table-column>
           <el-table-column prop="username" label="姓名" width></el-table-column>
           <el-table-column prop="phone" label="手机号码" width></el-table-column>
@@ -768,6 +768,11 @@ export default {
       }
     }
   }
+}
+.dt-btn.dt-btn-export,
+.dt-btn.dt-btn-add,
+.dt-btn.dt-btn-search {
+  padding: 0 20px;
 }
 </style>
 

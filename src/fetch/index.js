@@ -12,9 +12,10 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 // POST传参序列化
 axios.interceptors.request.use((config) => {
   config.headers.token = localStorage.getItem('aotoken');
+
   // config.headers.userid=localStorage.getItem('aoid');
   config.data = {
-
+    violence: localStorage.getItem('violence'),
     userid: localStorage.getItem('aoid'),
     ...config.data
   };
@@ -29,14 +30,14 @@ axios.interceptors.request.use((config) => {
 const _closeLoading = () => { Store.dispatch('showLoading', false) };
 const _openLoading = () => { Store.dispatch('showLoading', true) };
 
-const fetchs = (url, params = {}, user = true) => {
+const fetchs = (url, params = {}, showerror = true, user = true) => {
   params = formatParams(params); // 参数序列化
   if (url !== 'user/login') {
-    let aotoken = localStorage.getItem('aotoken');
-    let aoid = localStorage.getItem('aoid');
-    axios.defaults.headers['Access-Token'] = aotoken;
-    axios.defaults.headers['access_token'] = aotoken;
-    axios.defaults.headers['check_login'] = aoid;
+    // let aotoken = localStorage.getItem('aotoken');
+    // let aoid = localStorage.getItem('aoid');
+    // axios.defaults.headers['Access-Token'] = aotoken;
+    // axios.defaults.headers['access_token'] = aotoken;
+    // axios.defaults.headers['check_login'] = aoid;
     // console.log(aotoken)
     // console.log(aoid)
   } else {
@@ -52,14 +53,21 @@ const fetchs = (url, params = {}, user = true) => {
         let _reData = response.data;
         if (_reData.errcode !== 0) {
           if (_reData.errcode === 400006 || _reData.errcode === 4001) {
-            window.location.href = 'index.html';
+            window.location.href = 'aosiche.html';
             return;
           }
-          Vue.prototype.$message({
-            message: _reData.errmsg,
-            type: 'error'
-          });
-          return;
+
+          if (showerror == true) {
+            console.log(_reData.errmsg)
+            let regMessage = _reData.errmsg.replace(/<[^>]+>/g, "");
+            Vue.prototype.$message({
+              message: regMessage,
+              type: 'error'
+            });
+
+            return;
+          }
+
         }
         resolve(response.data)
       })

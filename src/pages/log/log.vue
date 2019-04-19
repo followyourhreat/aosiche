@@ -23,7 +23,8 @@
     },
     data(){
       return {
-        title:['人员登录信息','账号分配日志'],
+//        title:['人员登录信息','账号分配日志'],
+        title:['人员登录信息'],
         device:{
           'userInfo':{page:0,list:[]},
           'assign':{page:0,list:[]},

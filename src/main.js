@@ -16,7 +16,6 @@ import searchModel from './components/searchModel/index'
 // import dateRange from './components/dateRange'
 import ElSelectName from './global/ElSelectName';
 import SearchInputConfig from './global/SearchInputConfig';
-import './api' //第三方网络请求
 Vue.use(ElSelectName);
 Vue.use(iview);
 Vue.use(SearchInputConfig);

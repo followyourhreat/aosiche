@@ -15,11 +15,11 @@
       <div class="main-right">
         <div class="ivu-poptip">
           <div class="main-right-change">
-            <img src="../assets/img/ic-xinxi.png" alt>
+            <!-- <img src="../assets/img/ic-xinxi.png" alt=""> -->
           </div>
-          <div class="main-right-out">
-            <div class="one-style">luisrock</div>
-            <div class="two-style">管理员</div>
+          <div class="main-right-out" @click="go_out">
+            <div class="one-style">{{aousername}}</div>
+            <div class="two-style">{{usertype}}</div>
           </div>
         </div>
       </div>
@@ -102,16 +102,56 @@ export default {
       //   'sell':{page:0,list:[]}
       // },
       currentType: "设备总览",
-      SlidePageConfig
+      SlidePageConfig,
+      uid: "",
+      aousername: "",
+      usertype: ""
     };
   },
   mounted() {
-    this.getUserInfo();
+    this.uid = localStorage.getItem("aoid");
+    this.usertype = localStorage.getItem("accountnum");
+
+    this.aousername = localStorage.getItem("aousername");
+    console.log(this.aousername);
   },
   computed: {
     ...mapGetters(["accountInfo"])
   },
   methods: {
+    go_out() {
+      this.$confirm("是否退出登录?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          const params = {
+            id: this.uid
+          };
+          this.$http.logoff(params, msg => {
+            if (msg.errcode == 0) {
+              localStorage.removeItem("aoid");
+              localStorage.removeItem("accountnum");
+              localStorage.removeItem("aousername");
+              localStorage.removeItem("aotoken");
+              this.$router.push({ name: "login" });
+            }
+          });
+
+          //        this.$message({
+          //          type: 'success',
+          //          message: '删除成功!'
+          //        });
+        })
+        .catch(() => {
+          //        this.$message({
+          //          type: 'info',
+          //          message: '已取消删除'
+          //        });
+        });
+    },
+
     tabClick(index) {
       // console.log(index)
       alert(index);
@@ -135,11 +175,6 @@ export default {
       this.$http.accountLogout(msg => {
         localStorage.removeItem("Three-Access_Token");
         this.$router.push({ name: "login" });
-      });
-    },
-    getUserInfo() {
-      this.$post("index/info", { uid: 1 }).then(res => {
-        console.log(res);
       });
     },
     psdModifyActive() {
