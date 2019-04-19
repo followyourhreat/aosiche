@@ -17,7 +17,7 @@
     "iview-area": "1.5.17",
     "element-china-area-data": "^3.1.0",
     "element-ui": "^2.0.3",
-    "highcharts": "^5.0.14",
+    "highcharts": "^6.1.0",
     "md5": "^2.2.1",
     "mqtt": "^2.13.0",
     "qs": "^6.5.1",
